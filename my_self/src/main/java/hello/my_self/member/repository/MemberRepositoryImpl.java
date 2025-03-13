@@ -3,7 +3,9 @@ package hello.my_self.member.repository;
 import hello.my_self.member.domain.Member;
 import hello.my_self.member.entity.MemberEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public class MemberRepositoryImpl implements MemberRepository{
 

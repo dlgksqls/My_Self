@@ -10,6 +10,7 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,16 +28,16 @@ public class MemberEntity {
     private String description;
 
     @OneToMany(mappedBy = "memberEntity")
-    private ArrayList<MySchoolEntity> mySchoolEntityList;
+    private List<MySchoolEntity> mySchoolEntityList;
 
     @OneToMany(mappedBy = "memberEntity")
-    private ArrayList<MyProjectEntity> myProjectEntityList;
+    private List<MyProjectEntity> myProjectEntityList;
 
     @OneToMany(mappedBy = "memberEntity")
-    private ArrayList<MyRewardEntity> myRewardEntityList;
+    private List<MyRewardEntity> myRewardEntityList;
 
     @OneToMany(mappedBy = "memberEntity")
-    private ArrayList<MyStackEntity> myStackEntityList;
+    private List<MyStackEntity> myStackEntityList;
 
     public static MemberEntity toEntity(Member member) {
         MemberEntity memberEntity = new MemberEntity();

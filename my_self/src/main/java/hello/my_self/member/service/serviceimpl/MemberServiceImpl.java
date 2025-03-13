@@ -6,7 +6,9 @@ import hello.my_self.member.dto.MemberUpdateDto;
 import hello.my_self.member.repository.MemberRepository;
 import hello.my_self.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
