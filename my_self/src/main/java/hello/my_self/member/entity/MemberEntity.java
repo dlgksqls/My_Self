@@ -6,12 +6,13 @@ import hello.my_self.myreward.entity.MyRewardEntity;
 import hello.my_self.myschool.entity.MySchoolEntity;
 import hello.my_self.mystack.entity.MyStackEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Entity
+@Getter
 public class MemberEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,12 +38,12 @@ public class MemberEntity {
     @OneToMany(mappedBy = "memberEntity")
     private ArrayList<MyStackEntity> myStackEntityList;
 
-    public static MemberEntity be(Member member) {
+    public static MemberEntity toEntity(Member member) {
         MemberEntity memberEntity = new MemberEntity();
-        memberEntity.id = member.getId();
         memberEntity.name = member.getName();
         memberEntity.age = member.getAge();
         memberEntity.sex = member.getSex();
+        memberEntity.birth = member.getBirth();
         memberEntity.description = member.getDescription();
 
         memberEntity.myProjectEntityList = new ArrayList<>();
@@ -59,6 +60,7 @@ public class MemberEntity {
                 .name(name)
                 .age(age)
                 .sex(sex)
+                .birth(birth)
                 .description(description)
                 .build();
     }

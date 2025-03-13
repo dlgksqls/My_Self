@@ -3,6 +3,7 @@ package hello.my_self.Member.domain;
 import hello.my_self.member.domain.Member;
 import hello.my_self.member.dto.MemberCreateDto;
 import hello.my_self.member.dto.MemberUpdateDto;
+import hello.my_self.member.entity.MemberEntity;
 import hello.my_self.member.entity.Sex;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,56 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 public class MemberTest {
+
+    @Test
+    public void MemberEntity의_toEntity매서드를_통해_Domain을_Entity로_변환할_수_있다(){
+        // given
+        MemberCreateDto createDto = MemberCreateDto.builder()
+                .name("이한빈")
+                .birth(LocalDate.of(2000, 10, 6))
+                .age(26)
+                .sex(Sex.male)
+                .description("안녕하세요 개발자입니다.")
+                .build();
+
+        // when
+        Member member = new Member();
+        member.createMember(createDto);
+        MemberEntity entity = MemberEntity.toEntity(member);
+
+        // then
+        assertThat(entity.getId()).isNull();
+        assertThat(entity.getName()).isEqualTo("이한빈");
+        assertThat(entity.getBirth()).isEqualTo(LocalDate.of(2000, 10, 6));
+        assertThat(entity.getSex()).isEqualTo(Sex.male);
+        assertThat(entity.getDescription()).isEqualTo("안녕하세요 개발자입니다.");
+    }
+
+    @Test
+    public void MemberEntity의_toDomain매서드를_통해_Entity를_Domain으로_변환할_수_있다(){
+        // given
+        MemberCreateDto createDto = MemberCreateDto.builder()
+                .name("이한빈")
+                .birth(LocalDate.of(2000, 10, 6))
+                .age(26)
+                .sex(Sex.male)
+                .description("안녕하세요 개발자입니다.")
+                .build();
+
+        // when
+        Member member = new Member();
+        member.createMember(createDto);
+        MemberEntity entity = MemberEntity.toEntity(member);
+
+        Member domain = entity.toDomain();
+
+        // then
+        assertThat(domain.getId()).isNull();
+        assertThat(domain.getName()).isEqualTo("이한빈");
+        assertThat(domain.getBirth()).isEqualTo(LocalDate.of(2000, 10, 6));
+        assertThat(domain.getSex()).isEqualTo(Sex.male);
+        assertThat(domain.getDescription()).isEqualTo("안녕하세요 개발자입니다.");
+    }
 
     @Test
     public void Member_도메인은_memberCreateDto로_새로운_객체를_생성할_수_있다 () {

@@ -3,8 +3,7 @@ package hello.my_self.mock;
 import hello.my_self.member.domain.Member;
 import hello.my_self.member.repository.MemberRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeMemberRepository implements MemberRepository {
@@ -24,8 +23,22 @@ public class FakeMemberRepository implements MemberRepository {
                     .description(member.getDescription())
                     .build();
 
+            data.add(newMember);
             return newMember;
         }
-        return null;
+        data.removeIf(item -> Objects.equals(item.getId(), member.getId()));
+        data.add(member);
+        return member;
+    }
+
+    @Override
+    public Member findById(Long id) {
+        Optional<Member>member = data.stream().filter(m -> m.getId().equals(id)).findFirst();
+        return member.orElseThrow(() -> new NoSuchElementException("구성원이 없습니다."));
+    }
+
+    @Override
+    public void delete(Member member) {
+        data.removeIf(item -> Objects.equals(item.getId(), member.getId()));
     }
 }
