@@ -1,6 +1,5 @@
-package hello.my_self.Member.domain;
+package hello.my_self.member.domain;
 
-import hello.my_self.member.domain.Member;
 import hello.my_self.member.dto.MemberCreateDto;
 import hello.my_self.member.dto.MemberUpdateDto;
 import hello.my_self.member.entity.MemberEntity;
@@ -28,7 +27,7 @@ public class MemberTest {
 
         // when
         Member member = new Member();
-        member.createMember(createDto);
+        member.create(createDto);
         MemberEntity entity = MemberEntity.toEntity(member);
 
         // then
@@ -52,7 +51,7 @@ public class MemberTest {
 
         // when
         Member member = new Member();
-        member.createMember(createDto);
+        member.create(createDto);
         MemberEntity entity = MemberEntity.toEntity(member);
 
         Member domain = entity.toDomain();
@@ -78,7 +77,7 @@ public class MemberTest {
 
         // when
         Member newMember = new Member();
-        newMember.createMember(createDto);
+        newMember.create(createDto);
 
         // then
         assertThat(newMember.getId()).isNull();

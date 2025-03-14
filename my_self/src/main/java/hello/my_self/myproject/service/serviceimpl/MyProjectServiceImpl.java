@@ -1,4 +1,27 @@
 package hello.my_self.myproject.service.serviceimpl;
 
-public class MyProjectServiceImpl {
+import hello.my_self.myproject.domain.MyProject;
+import hello.my_self.myproject.dto.ProjectCreateDto;
+import hello.my_self.myproject.repository.MyProjectRepository;
+import hello.my_self.myproject.service.MyProjectService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class MyProjectServiceImpl implements MyProjectService {
+
+    private final MyProjectRepository myProjectRepository;
+
+    @Override
+    public MyProject create(ProjectCreateDto createProjectDto) {
+        MyProject newProject = new MyProject();
+        newProject.create(createProjectDto);
+        return myProjectRepository.save(newProject);
+    }
+
+    @Override
+    public MyProject findByName(String name) {
+        return myProjectRepository.findByName(name);
+    }
 }

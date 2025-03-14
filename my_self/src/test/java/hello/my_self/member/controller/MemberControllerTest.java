@@ -1,6 +1,5 @@
-package hello.my_self.Member.controller;
+package hello.my_self.member.controller;
 
-import hello.my_self.member.controller.MemberController;
 import hello.my_self.member.domain.Member;
 import hello.my_self.member.dto.MemberCreateDto;
 import hello.my_self.member.dto.MemberCreateResponseDto;

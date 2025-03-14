@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member create(MemberCreateDto createDto) {
         Member newMember = new Member();
-        newMember.createMember(createDto);
+        newMember.create(createDto);
         return memberRepository.save(newMember);
     }
 

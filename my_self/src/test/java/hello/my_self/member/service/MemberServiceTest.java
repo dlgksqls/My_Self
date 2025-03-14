@@ -1,14 +1,12 @@
-package hello.my_self.Member.service;
+package hello.my_self.member.service;
 
 import hello.my_self.member.domain.Member;
 import hello.my_self.member.dto.MemberCreateDto;
 import hello.my_self.member.dto.MemberUpdateDto;
 import hello.my_self.member.entity.Sex;
 import hello.my_self.member.repository.MemberRepository;
-import hello.my_self.member.service.MemberService;
 import hello.my_self.member.service.serviceimpl.MemberServiceImpl;
 import hello.my_self.mock.FakeMemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

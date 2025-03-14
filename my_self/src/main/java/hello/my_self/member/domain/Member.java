@@ -9,6 +9,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 @Getter
+@Builder
 public class Member {
 
     private Long id;
@@ -21,7 +22,6 @@ public class Member {
     public Member() {
     }
 
-    @Builder
     public Member(Long id, String name, LocalDate birth, int age, Sex sex, String description) {
         this.id = id;
         this.name = name;
@@ -31,7 +31,7 @@ public class Member {
         this.description = description;
     }
 
-    public void createMember(MemberCreateDto createDto) {
+    public void create(MemberCreateDto createDto) {
         this.name = createDto.getName();
         this.birth = createDto.getBirth();
         this.age = createDto.getAge();
