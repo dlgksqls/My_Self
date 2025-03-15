@@ -6,4 +6,6 @@ public interface MyProjectRepository {
     MyProject save(MyProject newProject);
 
     MyProject findByName(String projectName);
+
+    void delete(String name);
 }

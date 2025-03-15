@@ -41,9 +41,17 @@ public class MyProject {
     }
 
     public void update(ProjectUpdateDto updateProject) {
-        this.name = updateProject.getName();
-        this.role = updateProject.getRole();
-        this.description = updateProject.getDescription();
-        this.link = updateProject.getLink();
+        if (updateProject.getName() != null) {
+            this.name = updateProject.getName();
+        }
+        if (updateProject.getRole() != null) {
+            this.role = updateProject.getRole();
+        }
+        if (updateProject.getDescription() != null) {
+            this.description = updateProject.getDescription();
+        }
+        if (updateProject.getLink() != null) {
+            this.link = updateProject.getLink();
+        }
     }
 }

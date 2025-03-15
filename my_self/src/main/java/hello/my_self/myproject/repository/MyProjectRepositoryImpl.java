@@ -20,4 +20,9 @@ public class MyProjectRepositoryImpl implements MyProjectRepository{
     public MyProject findByName(String projectName) {
         return myProjectJpaRepository.findByName(projectName).toDomain();
     }
+
+    @Override
+    public void delete(String name) {
+        myProjectJpaRepository.deleteByName(name);
+    }
 }

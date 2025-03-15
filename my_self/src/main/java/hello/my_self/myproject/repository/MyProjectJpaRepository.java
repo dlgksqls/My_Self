@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MyProjectJpaRepository extends JpaRepository<MyProjectEntity, Long> {
     MyProjectEntity findByName(String projectName);
+
+    void deleteByName(String name);
 }

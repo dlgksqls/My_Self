@@ -5,6 +5,7 @@ import hello.my_self.myproject.repository.MyProjectRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -37,6 +38,11 @@ public class FakeMyProjectRepository implements MyProjectRepository {
         return data.stream()
                 .filter(item -> item.getName().equals(projectName))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new NoSuchElementException("해당 프로젝트는 없습니다."));
+    }
+
+    @Override
+    public void delete(String name) {
+        data.removeIf(item -> item.getName().equals(name));
     }
 }

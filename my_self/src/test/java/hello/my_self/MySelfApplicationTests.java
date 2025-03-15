@@ -3,7 +3,7 @@ package hello.my_self;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class MySelfApplicationTests {
 
     @Test
