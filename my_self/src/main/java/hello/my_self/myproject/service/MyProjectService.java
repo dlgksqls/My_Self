@@ -12,4 +12,6 @@ public interface MyProjectService {
     MyProject update(String name, ProjectUpdateDto projectUpdateDto);
 
     void delete(String name);
+
+    MyProject findById(Long id);
 }

@@ -42,6 +42,14 @@ public class FakeMyProjectRepository implements MyProjectRepository {
     }
 
     @Override
+    public MyProject findById(Long id) {
+        return data.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("해당 프로젝트는 없습니다."));
+    }
+
+    @Override
     public void delete(String name) {
         data.removeIf(item -> item.getName().equals(name));
     }

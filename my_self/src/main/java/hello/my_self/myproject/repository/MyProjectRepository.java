@@ -8,4 +8,6 @@ public interface MyProjectRepository {
     MyProject findByName(String projectName);
 
     void delete(String name);
+
+    MyProject findById(Long id);
 }

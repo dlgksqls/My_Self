@@ -73,6 +73,41 @@ public class ProjectServiceTest {
     }
 
     @Test
+    public void MyProjecetService_findById으로_프로젝트를_찾을_수_있다(){
+        // given
+        MemberCreateDto createMemberDto = MemberCreateDto.builder()
+                .name("이한빈")
+                .birth(LocalDate.of(2000, 10, 6))
+                .age(26)
+                .sex(Sex.male)
+                .description("안녕하세요 개발자입니다.")
+                .build();
+
+        Member member = memberService.create(createMemberDto);
+
+        ProjectCreateDto createProjectDto = ProjectCreateDto.builder()
+                .name("가볼까?")
+                .role("팀장")
+                .description("졸업작품")
+                .link("https://github.com/190000you/BE_AI_GO")
+                .member(member)
+                .build();
+
+        MyProject myProject = myProjectService.create(createProjectDto);
+
+        // when
+        MyProject project = myProjectService.findById(myProject.getId());
+
+        // then
+        assertThat(project.getId()).isEqualTo(1L);
+        assertThat(project.getName()).isEqualTo("가볼까?");
+        assertThat(project.getRole()).isEqualTo("팀장");
+        assertThat(project.getDescription()).isEqualTo("졸업작품");
+        assertThat(project.getLink()).isEqualTo("https://github.com/190000you/BE_AI_GO");
+        assertThat(project.getMember().getName()).isEqualTo("이한빈");
+    }
+
+    @Test
     public void MyProjecetService_findByName으로_프로젝트를_찾을_수_있다(){
         // given
         MemberCreateDto createMemberDto = MemberCreateDto.builder()

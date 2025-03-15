@@ -17,6 +17,11 @@ public class MyProjectRepositoryImpl implements MyProjectRepository{
     }
 
     @Override
+    public MyProject findById(Long id) {
+        return myProjectJpaRepository.findById(id).get().toDomain();
+    }
+
+    @Override
     public MyProject findByName(String projectName) {
         return myProjectJpaRepository.findByName(projectName).toDomain();
     }

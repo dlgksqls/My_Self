@@ -27,6 +27,12 @@ public class MyProjectServiceImpl implements MyProjectService {
     }
 
     @Override
+    public MyProject findById(Long id) {
+        MyProject findProject = myProjectRepository.findById(id);
+        return findProject;
+    }
+
+    @Override
     public MyProject update(String name, ProjectUpdateDto projectUpdateDto) {
         MyProject findProject = myProjectRepository.findByName(name);
         findProject.update(projectUpdateDto);
