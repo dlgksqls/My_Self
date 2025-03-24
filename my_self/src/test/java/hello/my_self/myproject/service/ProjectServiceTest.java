@@ -36,11 +36,11 @@ public class ProjectServiceTest {
         memberService = new MemberServiceImpl(memberRepository);
 
         myProjectRepository = new FakeMyProjectRepository();
-        myProjectService = new MyProjectServiceImpl(myProjectRepository);
+        myProjectService = new MyProjectServiceImpl(myProjectRepository, memberService);
     }
 
     @Test
-    public void MyProjecetService_create로_새로운_프로젝트를_생성할_수_있다(){
+    public void MyProjectService_create_로_새로운_프로젝트를_생성할_수_있다(){
         // given
         MemberCreateDto createMemberDto = MemberCreateDto.builder()
                 .name("이한빈")
@@ -57,7 +57,7 @@ public class ProjectServiceTest {
                 .role("팀장")
                 .description("졸업작품")
                 .link("https://github.com/190000you/BE_AI_GO")
-                .member(member)
+                .memberId(member.getId())
                 .build();
 
         // when
@@ -73,7 +73,7 @@ public class ProjectServiceTest {
     }
 
     @Test
-    public void MyProjecetService_findById으로_프로젝트를_찾을_수_있다(){
+    public void MyProjectService_findById_로_프로젝트를_찾을_수_있다(){
         // given
         MemberCreateDto createMemberDto = MemberCreateDto.builder()
                 .name("이한빈")
@@ -90,7 +90,7 @@ public class ProjectServiceTest {
                 .role("팀장")
                 .description("졸업작품")
                 .link("https://github.com/190000you/BE_AI_GO")
-                .member(member)
+                .memberId(member.getId())
                 .build();
 
         MyProject myProject = myProjectService.create(createProjectDto);
@@ -108,7 +108,7 @@ public class ProjectServiceTest {
     }
 
     @Test
-    public void MyProjecetService_findByName으로_프로젝트를_찾을_수_있다(){
+    public void MyProjectService_findByName_로_프로젝트를_찾을_수_있다(){
         // given
         MemberCreateDto createMemberDto = MemberCreateDto.builder()
                 .name("이한빈")
@@ -125,7 +125,7 @@ public class ProjectServiceTest {
                 .role("팀장")
                 .description("졸업작품")
                 .link("https://github.com/190000you/BE_AI_GO")
-                .member(member)
+                .memberId(member.getId())
                 .build();
 
         MyProject myProject = myProjectService.create(createProjectDto);
@@ -143,7 +143,7 @@ public class ProjectServiceTest {
     }
 
     @Test
-    public void MyProjecetService_findByName으로_프로젝트를_찾고_update로_프로젝트를_수정할_수_있다(){
+    public void MyProjectService_findByName_로_프로젝트를_찾고_update_로_프로젝트를_수정할_수_있다(){
         // given
         MemberCreateDto createMemberDto = MemberCreateDto.builder()
                 .name("이한빈")
@@ -160,7 +160,7 @@ public class ProjectServiceTest {
                 .role("팀장")
                 .description("졸업작품")
                 .link("https://github.com/190000you/BE_AI_GO")
-                .member(member)
+                .memberId(member.getId())
                 .build();
 
         MyProject myProject = myProjectService.create(createProjectDto);
@@ -171,7 +171,7 @@ public class ProjectServiceTest {
                 .build();
 
         // when
-        MyProject update = myProjectService.update(project.getName(), projectUpdateDto);
+        MyProject update = myProjectService.update(project.getId(), projectUpdateDto);
 
         // then
         assertThat(update.getId()).isEqualTo(1L);
@@ -183,7 +183,7 @@ public class ProjectServiceTest {
     }
 
     @Test
-    public void MyProjecetService_findByName으로_프로젝트를_찾고_delete로_프로젝트를_삭제할_수_있다(){
+    public void MyProjectService_findByName_로_프로젝트를_찾고_delete로_프로젝트를_삭제할_수_있다(){
         // given
         MemberCreateDto createMemberDto = MemberCreateDto.builder()
                 .name("이한빈")
@@ -200,7 +200,7 @@ public class ProjectServiceTest {
                 .role("팀장")
                 .description("졸업작품")
                 .link("https://github.com/190000you/BE_AI_GO")
-                .member(member)
+                .memberId(member.getId())
                 .build();
 
         MyProject myProject = myProjectService.create(createProjectDto);

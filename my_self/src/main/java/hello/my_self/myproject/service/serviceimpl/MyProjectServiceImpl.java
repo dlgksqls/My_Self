@@ -1,5 +1,7 @@
 package hello.my_self.myproject.service.serviceimpl;
 
+import hello.my_self.member.domain.Member;
+import hello.my_self.member.service.MemberService;
 import hello.my_self.myproject.domain.MyProject;
 import hello.my_self.myproject.dto.ProjectCreateDto;
 import hello.my_self.myproject.dto.ProjectUpdateDto;
@@ -7,17 +9,21 @@ import hello.my_self.myproject.repository.MyProjectRepository;
 import hello.my_self.myproject.service.MyProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class MyProjectServiceImpl implements MyProjectService {
 
     private final MyProjectRepository myProjectRepository;
+    private final MemberService memberService;
 
     @Override
+    @Transactional
     public MyProject create(ProjectCreateDto createProjectDto) {
         MyProject newProject = new MyProject();
-        newProject.create(createProjectDto);
+        Member getMember = memberService.findById(createProjectDto.getMemberId());
+        newProject.create(createProjectDto, getMember);
         return myProjectRepository.save(newProject);
     }
 
@@ -33,13 +39,15 @@ public class MyProjectServiceImpl implements MyProjectService {
     }
 
     @Override
-    public MyProject update(String name, ProjectUpdateDto projectUpdateDto) {
-        MyProject findProject = myProjectRepository.findByName(name);
+    @Transactional
+    public MyProject update(Long id, ProjectUpdateDto projectUpdateDto) {
+        MyProject findProject = myProjectRepository.findById(id);
         findProject.update(projectUpdateDto);
-        return myProjectRepository.save(findProject);
+        return myProjectRepository.update(findProject.getId(), projectUpdateDto);
     }
 
     @Override
+    @Transactional
     public void delete(String name) {
         myProjectRepository.delete(name);
     }

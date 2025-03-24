@@ -13,5 +13,5 @@ public class ProjectCreateDto {
     private String role;
     private String description;
     private String link;
-    private Member member;
+    private Long memberId;
 }

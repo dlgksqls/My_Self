@@ -28,7 +28,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void MemberSevice_create로_유저를_생성할_수_있다(){
+    public void MemberSevice_create_로_유저를_생성할_수_있다(){
 
         // given
         MemberCreateDto createDto = MemberCreateDto.builder()
@@ -52,7 +52,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void MemberService_findById로_유저를_찾을_수_있다(){
+    public void MemberService_findById_로_유저를_찾을_수_있다(){
         // given
         MemberCreateDto createDto = MemberCreateDto.builder()
                 .name("이한빈")
@@ -76,7 +76,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void MemberService_update로_유저를_수정할_수_있다(){
+    public void MemberService_update_로_유저를_수정할_수_있다(){
 
         // given
         MemberCreateDto createDto = MemberCreateDto.builder()
@@ -107,7 +107,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void MemberService_delete로_유저를_삭제할_수_있다(){
+    public void MemberService_delete_로_유저를_삭제할_수_있다(){
 
         // given
         MemberCreateDto createDto = MemberCreateDto.builder()

@@ -32,7 +32,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void MemberController로_등록된_사용자를_조회할_수_있다(){
+    public void MemberController_로_등록된_사용자를_조회할_수_있다(){
         // given
         MemberCreateDto createDto = MemberCreateDto.builder()
                 .name("이한빈")
@@ -56,7 +56,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void MemberController로_사용자를_등록할_수_있다(){
+    public void MemberController_로_사용자를_등록할_수_있다(){
         // given
         MemberCreateDto createDto = MemberCreateDto.builder()
                 .name("이한빈")

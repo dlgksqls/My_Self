@@ -5,7 +5,6 @@ import hello.my_self.member.dto.MemberCreateDto;
 import hello.my_self.member.entity.Sex;
 import hello.my_self.myproject.dto.ProjectCreateDto;
 import hello.my_self.myproject.dto.ProjectUpdateDto;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -33,12 +32,12 @@ public class ProjectTest {
                 .role("팀장")
                 .description("졸업작품")
                 .link("https://github.com/190000you/BE_AI_GO")
-                .member(newMember)
+                .memberId(newMember.getId())
                 .build();
 
         // when
         MyProject newProject = new MyProject();
-        newProject.create(project);
+        newProject.create(project, newMember);
 
         // then
         assertThat(newProject.getName()).isEqualTo("가볼까?");
@@ -49,7 +48,7 @@ public class ProjectTest {
     }
 
     @Test
-    public void Project_도메인은_projectUpdateDto로_새로운_객체를_수정할_수_있다(){
+    public void Project_도메인은_projectUpdateDto_로_새로운_객체를_수정할_수_있다(){
         // given
         MemberCreateDto member = MemberCreateDto.builder()
                 .name("이한빈")
@@ -67,11 +66,11 @@ public class ProjectTest {
                 .role("팀장")
                 .description("졸업작품")
                 .link("https://github.com/190000you/BE_AI_GO")
-                .member(newMember)
+                .memberId(newMember.getId())
                 .build();
 
         MyProject newProject = new MyProject();
-        newProject.create(project);
+        newProject.create(project, newMember);
 
         ProjectUpdateDto updateProject = ProjectUpdateDto.builder()
                 .name("쇼핑몰")

@@ -9,7 +9,7 @@ public interface MyProjectService {
 
     MyProject findByName(String name);
 
-    MyProject update(String name, ProjectUpdateDto projectUpdateDto);
+    MyProject update(Long id, ProjectUpdateDto projectUpdateDto);
 
     void delete(String name);
 

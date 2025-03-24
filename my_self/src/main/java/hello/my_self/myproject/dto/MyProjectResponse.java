@@ -15,15 +15,16 @@ public class MyProjectResponse {
     private String role;
     private String description;
     private String link;
-    private Member member;
+    private String memberName;
 
     public static MyProjectResponse response(MyProject findProject) {
         return MyProjectResponse.builder()
+                .id(findProject.getId())
                 .name(findProject.getName())
                 .role(findProject.getRole())
                 .description(findProject.getDescription())
                 .link(findProject.getLink())
-                .member(findProject.getMember())
+                .memberName(findProject.getMember().getName())
                 .build();
     }
 }

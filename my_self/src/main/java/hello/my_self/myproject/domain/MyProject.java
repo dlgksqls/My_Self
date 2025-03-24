@@ -3,10 +3,8 @@ package hello.my_self.myproject.domain;
 import hello.my_self.member.domain.Member;
 import hello.my_self.myproject.dto.ProjectCreateDto;
 import hello.my_self.myproject.dto.ProjectUpdateDto;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
@@ -32,12 +30,13 @@ public class MyProject {
     }
 
 
-    public void create(ProjectCreateDto project) {
+    public void create(ProjectCreateDto project, Member getMember) {
         this.name = project.getName();
         this.role = project.getRole();
         this.description = project.getDescription();
         this.link = project.getLink();
-        this.member = project.getMember();
+        this.member = getMember;
+
     }
 
     public void update(ProjectUpdateDto updateProject) {

@@ -65,7 +65,7 @@ public class MemberTest {
     }
 
     @Test
-    public void Member_도메인은_memberCreateDto로_새로운_객체를_생성할_수_있다 () {
+    public void Member_도메인은_memberCreateDto_로_새로운_객체를_생성할_수_있다 () {
         // given
         MemberCreateDto createDto = MemberCreateDto.builder()
                 .name("이한빈")
@@ -88,7 +88,7 @@ public class MemberTest {
     }
 
     @Test
-    public void Member_도매인은_MemberUpdateDto로_객체를_수정할_수_있다(){
+    public void Member_도매인은_MemberUpdateDto_로_객체를_수정할_수_있다(){
         // given
         Member newMember = Member.builder()
                 .id(1L)
