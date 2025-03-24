@@ -35,6 +35,7 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24' // 최신 버전으로 변경
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly(files("$projectDir/../b_app/build/intermediates/app_classes/debug/classes.jar")) // ./gradlew test 통과하기 위해...
 }
 
 tasks.named('test') {
