@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProjectTest {
+public class MyProjectTest {
 
     @Test
     public void Project_도메인은_projectCreateDto로_새로운_객체를_생성할_수_있다(){

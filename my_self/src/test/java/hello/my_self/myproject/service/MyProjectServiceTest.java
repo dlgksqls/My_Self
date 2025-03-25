@@ -13,7 +13,6 @@ import hello.my_self.myproject.dto.ProjectCreateDto;
 import hello.my_self.myproject.dto.ProjectUpdateDto;
 import hello.my_self.myproject.repository.MyProjectRepository;
 import hello.my_self.myproject.service.serviceimpl.MyProjectServiceImpl;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +22,7 @@ import java.util.NoSuchElementException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ProjectServiceTest {
+public class MyProjectServiceTest {
 
     private MemberRepository memberRepository;
     private MemberService memberService;
