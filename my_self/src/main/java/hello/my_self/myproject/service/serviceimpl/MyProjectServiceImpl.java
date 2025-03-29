@@ -42,7 +42,6 @@ public class MyProjectServiceImpl implements MyProjectService {
     @Transactional
     public MyProject update(Long id, ProjectUpdateDto projectUpdateDto) {
         MyProject findProject = myProjectRepository.findById(id);
-        findProject.update(projectUpdateDto);
         return myProjectRepository.update(findProject.getId(), projectUpdateDto);
     }
 

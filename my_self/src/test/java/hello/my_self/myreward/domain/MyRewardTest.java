@@ -3,8 +3,8 @@ package hello.my_self.myreward.domain;
 import hello.my_self.member.domain.Member;
 import hello.my_self.member.dto.MemberCreateDto;
 import hello.my_self.member.entity.Sex;
-import hello.my_self.myreward.dto.RewardCreateDto;
-import hello.my_self.myreward.dto.RewardUpdateDto;
+import hello.my_self.myreward.dto.MyRewardCreateDto;
+import hello.my_self.myreward.dto.MyRewardUpdateDto;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -27,7 +27,7 @@ public class MyRewardTest {
         Member newMember = new Member();
         newMember.create(member);
 
-        RewardCreateDto createDto = RewardCreateDto.builder()
+        MyRewardCreateDto createDto = MyRewardCreateDto.builder()
                 .name("장려상")
                 .host("계명대학교 산학인재원")
                 .number("K-38")
@@ -59,7 +59,7 @@ public class MyRewardTest {
         Member newMember = new Member();
         newMember.create(member);
 
-        RewardCreateDto createDto = RewardCreateDto.builder()
+        MyRewardCreateDto createDto = MyRewardCreateDto.builder()
                 .name("장려상")
                 .host("계명대학교 산학인재원")
                 .number("K-38")
@@ -70,7 +70,7 @@ public class MyRewardTest {
         reward.create(createDto, newMember);
 
         // when
-        RewardUpdateDto updateDto = RewardUpdateDto.builder()
+        MyRewardUpdateDto updateDto = MyRewardUpdateDto.builder()
                 .name("최우수상")
                 .host("계명대학교")
                 .number("K-111")

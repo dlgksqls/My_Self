@@ -107,6 +107,7 @@ public class MyProjectControllerTest {
         assertThat(result.getBody().getRole()).isEqualTo("팀장");
         assertThat(result.getBody().getDescription()).isEqualTo("졸업작품");
         assertThat(result.getBody().getLink()).isEqualTo("https://github.com/190000you/BE_AI_GO");
+        assertThat(result.getBody().getMemberName()).isEqualTo("이한빈");
     }
 
     @Test
@@ -148,5 +149,6 @@ public class MyProjectControllerTest {
         assertThat(result.getBody().getRole()).isEqualTo("팀장");
         assertThat(result.getBody().getDescription()).isEqualTo("개인프로젝트");
         assertThat(result.getBody().getLink()).isEqualTo("https://github.com/dlgksqls/web_shopping.git");
+        assertThat(result.getBody().getMemberName()).isEqualTo("이한빈");
     }
 }

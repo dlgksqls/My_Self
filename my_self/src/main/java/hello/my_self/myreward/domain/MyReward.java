@@ -2,8 +2,8 @@ package hello.my_self.myreward.domain;
 
 
 import hello.my_self.member.domain.Member;
-import hello.my_self.myreward.dto.RewardCreateDto;
-import hello.my_self.myreward.dto.RewardUpdateDto;
+import hello.my_self.myreward.dto.MyRewardCreateDto;
+import hello.my_self.myreward.dto.MyRewardUpdateDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -30,7 +30,7 @@ public class MyReward {
     public MyReward() {
     }
 
-    public void create(RewardCreateDto reward, Member member){
+    public void create(MyRewardCreateDto reward, Member member){
         this.name = reward.getName();
         this.host = reward.getHost();
         this.number = reward.getNumber();
@@ -38,7 +38,7 @@ public class MyReward {
         this.member = member;
     }
 
-    public void update(RewardUpdateDto reward){
+    public void update(MyRewardUpdateDto reward){
         if (reward.getName() != null) this.name = reward.getName();
         if (reward.getHost() != null) this.host = reward.getHost();
         if (reward.getNumber() != null) this.number = reward.getNumber();

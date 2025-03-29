@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class RewardUpdateDto {
+public class MyRewardUpdateDto {
     private String name;
     private String host;
     private String number;

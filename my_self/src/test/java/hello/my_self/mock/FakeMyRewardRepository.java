@@ -1,11 +1,12 @@
 package hello.my_self.mock;
 
-import hello.my_self.myproject.domain.MyProject;
 import hello.my_self.myreward.domain.MyReward;
+import hello.my_self.myreward.dto.MyRewardUpdateDto;
 import hello.my_self.myreward.repository.MyRewardRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeMyRewardRepository implements MyRewardRepository {
@@ -27,5 +28,37 @@ public class FakeMyRewardRepository implements MyRewardRepository {
 
         data.add(reward);
         return reward;
+    }
+
+    @Override
+    public MyReward findById(Long id) {
+        return data.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("해당 상은 없습니다."));
+    }
+
+    @Override
+    public MyReward findByName(String name) {
+        return data.stream()
+                .filter(item -> item.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("해당 상은 없습니다."));
+    }
+
+    @Override
+    public MyReward update(String name, MyRewardUpdateDto myRewardUpdateDto) {
+        MyReward findReward = data.stream()
+                .filter(item -> item.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("해당 상은 없습니다."));
+
+        findReward.update(myRewardUpdateDto);
+        return findReward;
+    }
+
+    @Override
+    public void delete(String name) {
+        data.removeIf(item -> item.getName().equals(name));
     }
 }

@@ -112,4 +112,19 @@ public class MemberTest {
         assertThat(newMember.getName()).isEqualTo("류현진");
         assertThat(newMember.getDescription()).isEqualTo("안녕하세요 야구선수입니다.");
     }
+
+    @Test
+    public void createFirstMember로_첫_멤버를_생성할_수_있다(){
+        // given
+        // when
+        Member member = new Member();
+        member.createFistMember();
+
+        // then
+        assertThat(member.getName()).isEqualTo("lee");
+        assertThat(member.getBirth()).isEqualTo(LocalDate.of(1999, 12, 03));
+        assertThat(member.getAge()).isEqualTo(13);
+        assertThat(member.getSex()).isEqualTo(Sex.male);
+        assertThat(member.getDescription()).isEqualTo("안녕하세요");
+    }
 }
