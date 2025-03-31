@@ -22,14 +22,14 @@ public class MyRewardEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
-    public static MyRewardEntity toEntity(MyReward myReward, Optional<MemberEntity> getMember) {
+    public static MyRewardEntity toEntity(MyReward myReward, MemberEntity getMember) {
         MyRewardEntity myRewardEntity = new MyRewardEntity();
         myRewardEntity.id = myReward.getId();
         myRewardEntity.name = myReward.getName();
         myRewardEntity.description = myReward.getDescription();
         myRewardEntity.host = myReward.getHost();
         myRewardEntity.number = myReward.getNumber();
-        myRewardEntity.memberEntity = getMember.get();
+        myRewardEntity.memberEntity = getMember;
 
         return myRewardEntity;
     }

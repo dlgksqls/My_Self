@@ -20,26 +20,29 @@ public class MyRewardRepositoryImpl implements MyRewardRepository{
     @Override
     public MyReward save(MyReward myReward) {
         Optional<MemberEntity> getMember = memberJpaRepository.findById(myReward.getMember().getId());
-        return myRewardJpaRepository.save(MyRewardEntity.toEntity(myReward, getMember)).toDomain();
+        return myRewardJpaRepository.save(MyRewardEntity.toEntity(myReward, getMember.get())).toDomain();
     }
 
     @Override
     public MyReward findById(Long id) {
-        return null;
+        return myRewardJpaRepository.findById(id).get().toDomain();
     }
 
     @Override
     public MyReward findByName(String name) {
-        return null;
+        return myRewardJpaRepository.findByName(name);
     }
 
     @Override
     public MyReward update(String name, MyRewardUpdateDto myRewardUpdateDto) {
-        return null;
+        MyReward myReward = myRewardJpaRepository.findByName(name);
+        myReward.update(myRewardUpdateDto);
+        return myReward;
     }
 
     @Override
     public void delete(String name) {
-
+        MyReward myReward = myRewardJpaRepository.findByName(name);
+        myRewardJpaRepository.delete(MyRewardEntity.toEntity(myReward, MemberEntity.toEntity(myReward.getMember())));
     }
 }

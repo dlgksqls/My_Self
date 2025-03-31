@@ -3,6 +3,7 @@ package hello.my_self.myschool.entity;
 import hello.my_self.member.entity.MemberEntity;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,8 +15,8 @@ public class MySchoolEntity {
 
     private String name;
     private String major;
-    private float score;
-    private Date graduation_date;
+    private double score;
+    private LocalDate graduation_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
