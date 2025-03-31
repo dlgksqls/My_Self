@@ -2,6 +2,7 @@ package hello.my_self.myschool.domain;
 
 import hello.my_self.member.domain.Member;
 import hello.my_self.myschool.dto.SchoolCreateDto;
+import hello.my_self.myschool.dto.SchoolUpdateDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -37,5 +38,20 @@ public class MySchool {
         this.score = createDto.getScore();
         this.graduation_date = createDto.getGraduation_date();
         this.member = createDto.getMember();
+    }
+
+    public void update(SchoolUpdateDto updateDto) {
+        if (updateDto.getName() != null){
+            this.name = updateDto.getName();
+        }
+        if (updateDto.getMajor() != null){
+            this.major = updateDto.getMajor();
+        }
+        if (updateDto.getScore() != 0.0){
+            this.score = updateDto.getScore();
+        }
+        if (updateDto.getGraduation_date() != null){
+            this.graduation_date = updateDto.getGraduation_date();
+        }
     }
 }
