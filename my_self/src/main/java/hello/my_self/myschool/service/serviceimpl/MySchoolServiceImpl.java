@@ -37,7 +37,7 @@ public class MySchoolServiceImpl implements MySchoolService {
     }
 
     @Override
-    public void delete(MySchool mySchool) {
-        mySchoolRepository.delete(mySchool.getId());
+    public void delete(Long id) {
+        mySchoolRepository.delete(id);
     }
 }

@@ -8,6 +8,7 @@ import hello.my_self.myproject.entity.MyProjectEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Repository
@@ -19,7 +20,8 @@ public class MyProjectRepositoryImpl implements MyProjectRepository{
 
     @Override
     public MyProject save(MyProject newProject) {
-        Optional<MemberEntity> getMember = memberJpaRepository.findById(newProject.getMember().getId());
+        MemberEntity getMember = memberJpaRepository.findById(newProject.getMember().getId())
+                .orElseThrow(() -> new NoSuchElementException("해당 멤버는 없습니다."));
         return myProjectJpaRepository.save(MyProjectEntity.toEntity(newProject, getMember)).toDomain();
         // Member 를 영속성객체에 저장한 후 Project 를 저장해야하는데,, domain 으로는 해결하기 어려워서 그냥 entity 를 불러옴,,,
     }

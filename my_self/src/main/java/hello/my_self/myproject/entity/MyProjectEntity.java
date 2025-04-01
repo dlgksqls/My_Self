@@ -25,14 +25,15 @@ public class MyProjectEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
-    public static MyProjectEntity toEntity(MyProject project, Optional<MemberEntity> getMember) {
+    public static MyProjectEntity toEntity(MyProject project, MemberEntity getMember) {
         MyProjectEntity myProjectEntity = new MyProjectEntity();
         myProjectEntity.name = project.getName();
         myProjectEntity.role = project.getRole();
         myProjectEntity.description = project.getDescription();
         myProjectEntity.link = project.getLink();
-        myProjectEntity.memberEntity = getMember.get();
-        myProjectEntity.memberEntity.getMyProjectEntityList().add(myProjectEntity);
+        myProjectEntity.memberEntity = getMember;
+        getMember.getMyProjectEntityList().add(myProjectEntity);
+//        myProjectEntity.memberEntity.getMyProjectEntityList().add(myProjectEntity);
 
         return myProjectEntity;
     }

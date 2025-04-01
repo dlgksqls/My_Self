@@ -5,6 +5,8 @@ import hello.my_self.member.entity.MemberEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 public class MemberRepositoryImpl implements MemberRepository{
@@ -17,7 +19,9 @@ public class MemberRepositoryImpl implements MemberRepository{
 
     @Override
     public Member findById(Long id) {
-        return memberJpaRepository.findById(id).get().toDomain();
+        return memberJpaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당 학생은 없습니다."))
+                .toDomain();
     }
 
     @Override

@@ -8,6 +8,7 @@ import hello.my_self.myreward.entity.MyRewardEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Repository
@@ -19,8 +20,10 @@ public class MyRewardRepositoryImpl implements MyRewardRepository{
 
     @Override
     public MyReward save(MyReward myReward) {
-        Optional<MemberEntity> getMember = memberJpaRepository.findById(myReward.getMember().getId());
-        return myRewardJpaRepository.save(MyRewardEntity.toEntity(myReward, getMember.get())).toDomain();
+        MemberEntity getMember = memberJpaRepository.findById(myReward.getMember().getId())
+                .orElseThrow(() -> new NoSuchElementException("해당 멤버는 없습니다."));
+
+        return myRewardJpaRepository.save(MyRewardEntity.toEntity(myReward, getMember)).toDomain();
     }
 
     @Override

@@ -30,6 +30,7 @@ public class MyRewardEntity {
         myRewardEntity.host = myReward.getHost();
         myRewardEntity.number = myReward.getNumber();
         myRewardEntity.memberEntity = getMember;
+        getMember.getMyRewardEntityList().add(myRewardEntity);
 
         return myRewardEntity;
     }

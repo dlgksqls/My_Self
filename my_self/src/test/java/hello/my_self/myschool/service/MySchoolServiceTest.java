@@ -135,7 +135,7 @@ public class MySchoolServiceTest {
         MySchool mySchool = mySchoolService.create(createDto);
 
         // when
-        mySchoolService.delete(mySchool);
+        mySchoolService.delete(mySchool.getId());
 
         // then
         assertThatThrownBy(() -> {

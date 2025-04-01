@@ -11,5 +11,5 @@ public interface MySchoolService {
 
     MySchool update(Long id, SchoolUpdateDto updateDto);
 
-    void delete(MySchool mySchool);
+    void delete(Long id);
 }

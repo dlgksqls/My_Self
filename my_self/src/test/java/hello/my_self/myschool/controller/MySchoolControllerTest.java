@@ -8,6 +8,8 @@ import hello.my_self.member.service.serviceimpl.MemberServiceImpl;
 import hello.my_self.mock.FakeMemberRepository;
 import hello.my_self.mock.FakeMySchoolRepository;
 import hello.my_self.myschool.domain.MySchool;
+import hello.my_self.myschool.dto.MySchoolCreateResponse;
+import hello.my_self.myschool.dto.MySchoolResponse;
 import hello.my_self.myschool.dto.SchoolCreateDto;
 import hello.my_self.myschool.dto.SchoolUpdateDto;
 import hello.my_self.myschool.repository.MySchoolRepository;
@@ -59,7 +61,7 @@ public class MySchoolControllerTest {
     public void MySchoolController_로_새로운_학교를_등록할_수_있다(){
         // given
         // when
-        ResponseEntity<MySchool> result = mySchoolController.create(createDto);
+        ResponseEntity<MySchoolCreateResponse> result = mySchoolController.create(createDto);
 
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -67,7 +69,7 @@ public class MySchoolControllerTest {
         assertThat(result.getBody().getScore()).isEqualTo(4.0);
         assertThat(result.getBody().getMajor()).isEqualTo("컴퓨터공학과");
         assertThat(result.getBody().getGraduation_date()).isEqualTo(LocalDate.of(2025, 2, 18));
-        assertThat(result.getBody().getMember().getName()).isEqualTo("이한빈");
+        assertThat(result.getBody().getMemberName()).isEqualTo("이한빈");
     }
 
     @Test
@@ -82,7 +84,7 @@ public class MySchoolControllerTest {
                 .build();
 
         // when
-        ResponseEntity<MySchool> result = mySchoolController.update(mySchool.getId(), updateDto);
+        ResponseEntity<MySchoolResponse> result = mySchoolController.update(mySchool.getId(), updateDto);
 
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
@@ -90,7 +92,7 @@ public class MySchoolControllerTest {
         assertThat(result.getBody().getScore()).isEqualTo(4.5);
         assertThat(result.getBody().getMajor()).isEqualTo("조경학과");
         assertThat(result.getBody().getGraduation_date()).isEqualTo(LocalDate.of(2025, 2, 18));
-        assertThat(result.getBody().getMember().getName()).isEqualTo("이한빈");
+        assertThat(result.getBody().getMemberName()).isEqualTo("이한빈");
     }
 
     @Test
@@ -99,7 +101,7 @@ public class MySchoolControllerTest {
         MySchool mySchool = mySchoolService.create(createDto);
 
         // when
-        mySchoolController.delete(mySchool);
+        mySchoolController.delete(mySchool.getId());
 
         // then
         assertThatThrownBy(() -> {
