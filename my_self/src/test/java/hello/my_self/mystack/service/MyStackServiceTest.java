@@ -16,12 +16,18 @@ import hello.my_self.myproject.service.serviceimpl.MyProjectServiceImpl;
 import hello.my_self.myschool.dto.SchoolCreateDto;
 import hello.my_self.mystack.domain.MyStack;
 import hello.my_self.mystack.dto.MyStackCreateDto;
+import hello.my_self.mystack.dto.MyStackUpdateDto;
 import hello.my_self.mystack.repository.MyStackRepository;
 import hello.my_self.mystack.service.serviceimpl.MyStackServiceImpl;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.NoSuchElementException;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MyStackServiceTest {
 
@@ -45,7 +51,7 @@ public class MyStackServiceTest {
         myProjectService = new MyProjectServiceImpl(myProjectRepository, memberService);
 
         myStackRepository = new FakeMyStackRepository();
-        myStackService = new MyStackServiceImpl();
+        myStackService = new MyStackServiceImpl(myStackRepository, memberRepository, myProjectRepository);
 
         member = FirstMemberCreate.createFirstMember();
         member = memberRepository.save(member);
@@ -63,10 +69,81 @@ public class MyStackServiceTest {
     @Test
     public void MyStackService_의_create_로_새로운_스택을_추가할_수_있다(){
         // given
-
-
         // when
+        MyStack myStack = myStackService.create(createDto);
 
         // then
+        assertThat(myStack.getName()).isEqualTo("Spring");
+        assertThat(myStack.getMember().getName()).isEqualTo("이한빈");
+        assertThat(myStack.getMyProject().getName()).isEqualTo("가볼까?");
+    }
+
+    @Test
+    public void MyStackService_의_findById_로_스택을_찾을_수_있다(){
+        // given
+        MyStack myStack = myStackService.create(createDto);
+
+        // when
+        MyStack findStack = myStackService.findById(myStack.getId());
+
+        // then
+        assertThat(findStack.getName()).isEqualTo("Spring");
+        assertThat(findStack.getMember().getName()).isEqualTo("이한빈");
+        assertThat(findStack.getMyProject().getName()).isEqualTo("가볼까?");
+    }
+
+    @Test
+    public void MyStackService_의_findByName_으로_스택을_찾을_수_있다(){
+        // given
+        MyStack myStack = myStackService.create(createDto);
+
+        // when
+        MyStack findStack = myStackService.findByName(myStack.getName());
+
+        // then
+        assertThat(findStack.getName()).isEqualTo("Spring");
+        assertThat(findStack.getMember().getName()).isEqualTo("이한빈");
+        assertThat(findStack.getMyProject().getName()).isEqualTo("가볼까?");
+    }
+
+    @Test
+    public void MyStackService_의_findByName_으로_존재하지_않는_스택을_찾는다면_예외를_발생시킨다(){
+        // given
+        // when
+        // then
+        assertThatThrownBy(() -> {
+            myStackService.findByName("NodeJs");
+        }).isInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    public void MyStackService_의_update_로_스택을_수정할_수_있다(){
+        // given
+        MyStack myStack = myStackService.create(createDto);
+        MyStackUpdateDto updateDto = MyStackUpdateDto.builder()
+                .name("Django")
+                .build();
+
+        // when
+        MyStack updateStack = myStackService.update(myStack.getId(), updateDto);
+
+        // then
+        assertThat(updateStack.getName()).isEqualTo("Django");
+        assertThat(updateStack.getMember().getName()).isEqualTo("이한빈");
+        assertThat(updateStack.getMyProject().getName()).isEqualTo("가볼까?");
+    }
+
+    @Test
+    public void MyStackService_의_delete_로_스택을_삭제할_수_있다(){
+        // given
+        MyStack myStack = myStackService.create(createDto);
+
+        // when
+        myStackService.delete(myStack.getId());
+
+        // then
+        assertThatThrownBy(() -> {
+            myStackService.findByName(myStack.getName());
+        }).isInstanceOf(NoSuchElementException.class);
     }
 }
