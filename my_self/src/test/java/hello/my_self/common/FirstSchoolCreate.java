@@ -16,11 +16,11 @@ public class FirstSchoolCreate {
                 .graduation_date(LocalDate.of(2025, 02, 18))
                 .major("컴퓨터공학과")
                 .score(4.0)
-                .member(member)
+                .memberId(member.getId())
                 .build();
 
         MySchool newSchool = new MySchool();
-        newSchool.create(createDto);
+        newSchool.create(createDto, member);
         return newSchool;
     }
 }

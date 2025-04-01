@@ -32,12 +32,12 @@ public class MySchool {
     public MySchool() {
     }
 
-    public void create(SchoolCreateDto createDto) {
+    public void create(SchoolCreateDto createDto, Member member) {
         this.name = createDto.getName();
         this.major = createDto.getMajor();
         this.score = createDto.getScore();
         this.graduation_date = createDto.getGraduation_date();
-        this.member = createDto.getMember();
+        this.member = member;
     }
 
     public void update(SchoolUpdateDto updateDto) {

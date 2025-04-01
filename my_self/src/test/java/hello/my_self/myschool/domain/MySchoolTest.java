@@ -28,13 +28,13 @@ public class MySchoolTest {
                 .graduation_date(LocalDate.of(2025, 2, 18))
                 .major("컴퓨터공학과")
                 .score(4.0)
-                .member(firstMember)
+                .memberId(firstMember.getId())
                 .build();
 
         MySchool mySchool = new MySchool();
 
         // when
-        mySchool.create(createDto);
+        mySchool.create(createDto, firstMember);
 
         // then
         assertThat(mySchool.getName()).isEqualTo("계명대학교");

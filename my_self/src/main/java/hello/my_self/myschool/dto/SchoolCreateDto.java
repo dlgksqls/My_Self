@@ -15,5 +15,5 @@ public class SchoolCreateDto {
     private String major;
     private double score;
     private LocalDate graduation_date;
-    private Member member;
+    private Long memberId;
 }
