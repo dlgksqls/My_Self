@@ -3,6 +3,7 @@ package hello.my_self.mystack.entity;
 import hello.my_self.member.entity.MemberEntity;
 import hello.my_self.myproject.entity.MyProjectEntity;
 import hello.my_self.mystack.domain.MyStack;
+import hello.my_self.mystack.dto.MyStackUpdateDto;
 import jakarta.persistence.*;
 
 @Entity
@@ -38,5 +39,9 @@ public class MyStackEntity {
                 .member(memberEntity.toDomain())
                 .myProject(myProjectEntity.toDomain())
                 .build();
+    }
+
+    public void update(MyStackUpdateDto updateDto) {
+        if (updateDto.getName() != null) this.name = updateDto.getName();
     }
 }

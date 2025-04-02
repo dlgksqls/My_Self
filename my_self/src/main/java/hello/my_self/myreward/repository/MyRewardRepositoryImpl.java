@@ -8,6 +8,7 @@ import hello.my_self.myreward.entity.MyRewardEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -29,29 +30,37 @@ public class MyRewardRepositoryImpl implements MyRewardRepository{
 
     @Override
     public MyReward findById(Long id) {
-        return myRewardJpaRepository.findById(id).get().toDomain();
+        return myRewardJpaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당 상은 없습니다"))
+                .toDomain();
     }
 
     @Override
     public MyReward findByName(String name) {
-        return myRewardJpaRepository.findByName(name);
+        return myRewardJpaRepository.findByName(name).toDomain();
     }
 
     @Override
     public MyReward update(String name, MyRewardUpdateDto myRewardUpdateDto) {
-        MyReward myReward = myRewardJpaRepository.findByName(name);
-        myReward.update(myRewardUpdateDto);
-        return myReward;
+        MyRewardEntity updateReward = myRewardJpaRepository.findByName(name);
+        updateReward.update(myRewardUpdateDto);
+        return updateReward.toDomain();
     }
 
     @Override
     public void delete(String name) {
-        MyReward myReward = myRewardJpaRepository.findByName(name);
-        myRewardJpaRepository.delete(MyRewardEntity.toEntity(myReward, MemberEntity.toEntity(myReward.getMember())));
+        MyRewardEntity deleteReward = myRewardJpaRepository.findByName(name);
+        myRewardJpaRepository.delete(deleteReward);
     }
 
     @Override
     public List<MyReward> findByMemberId(Long memberId) {
-        return myRewardJpaRepository.findByMemberId(memberId);
+        List<MyRewardEntity> memberReward = myRewardJpaRepository.findByMemberId(memberId);
+        List<MyReward> returnReward = new ArrayList<>();
+        for (MyRewardEntity myRewardEntity : memberReward) {
+            returnReward.add(myRewardEntity.toDomain());
+        }
+
+        return returnReward;
     }
 }

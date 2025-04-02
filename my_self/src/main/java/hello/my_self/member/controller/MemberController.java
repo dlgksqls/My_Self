@@ -33,7 +33,7 @@ public class MemberController {
         return new ResponseEntity<>(MemberCreateResponseDto.response(newMember), HttpStatus.CREATED);
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/resume/{id}")
     public ResponseEntity<MemberRelatedDto> viewAllRelation(@PathVariable("id") long id){
         MemberRelatedDto returnDto = memberRelatedService.viewAllRelation(id);
         return new ResponseEntity<>(returnDto, HttpStatus.OK);

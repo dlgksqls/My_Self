@@ -2,6 +2,7 @@ package hello.my_self.myschool.entity;
 
 import hello.my_self.member.entity.MemberEntity;
 import hello.my_self.myschool.domain.MySchool;
+import hello.my_self.myschool.dto.SchoolUpdateDto;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -44,5 +45,20 @@ public class MySchoolEntity {
                 .graduation_date(graduation_date)
                 .member(memberEntity.toDomain())
                 .build();
+    }
+
+    public void update(SchoolUpdateDto updateDto) {
+        if (updateDto.getName() != null){
+            this.name = updateDto.getName();
+        }
+        if (updateDto.getMajor() != null){
+            this.major = updateDto.getMajor();
+        }
+        if (updateDto.getScore() != 0.0){
+            this.score = updateDto.getScore();
+        }
+        if (updateDto.getGraduation_date() != null){
+            this.graduation_date = updateDto.getGraduation_date();
+        }
     }
 }

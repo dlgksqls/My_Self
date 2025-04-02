@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MySchoolJpaRepository extends JpaRepository<MySchoolEntity, Long> {
-    @Query("select s from MySchoolEntity s join fetch s.memberEntity m where m.id =: memberId")
-    List<MySchool> findByMemberId(@Param("memberId") Long memberId);
+    @Query("select s from MySchoolEntity s join fetch s.memberEntity m where m.id = :memberId")
+    List<MySchoolEntity> findByMemberId(@Param("memberId") Long memberId);
 }

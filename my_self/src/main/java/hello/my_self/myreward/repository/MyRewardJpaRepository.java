@@ -9,8 +9,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MyRewardJpaRepository extends JpaRepository<MyRewardEntity, Long> {
-    MyReward findByName(String name);
 
-    @Query("select r from MyRewardEntity r join fetch r.memberEntity m where m.id =: memberId")
-    List<MyReward> findByMemberId(@Param("memberId") Long memberId);
+    @Query("select r from MyRewardEntity r where r.name = :name")
+    MyRewardEntity findByName(@Param("name") String name);
+
+    @Query("select r from MyRewardEntity r join fetch r.memberEntity m where m.id = :memberId")
+    List<MyRewardEntity> findByMemberId(@Param("memberId") Long memberId);
 }

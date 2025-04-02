@@ -9,6 +9,7 @@ import hello.my_self.myschool.entity.MySchoolEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -36,12 +37,11 @@ public class MySchoolRepositoryImpl implements MySchoolRepository{
 
     @Override
     public MySchool update(Long id, SchoolUpdateDto updateDto) {
-        MySchool myschool = mySchoolJpaRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("해당 학교는 등록되지 않았습니다."))
-                .toDomain();
+        MySchoolEntity findSchool = mySchoolJpaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당 학교는 등록되지 않았습니다."));
 
-        myschool.update(updateDto);
-        return myschool;
+        findSchool.update(updateDto);
+        return findSchool.toDomain();
     }
 
     @Override
@@ -54,6 +54,12 @@ public class MySchoolRepositoryImpl implements MySchoolRepository{
 
     @Override
     public List<MySchool> findByMemberId(Long memberId) {
-        return mySchoolJpaRepository.findByMemberId(memberId);
+        List<MySchoolEntity> memberSchool = mySchoolJpaRepository.findByMemberId(memberId);
+        List<MySchool> returnSchool = new ArrayList<>();
+        for (MySchoolEntity mySchoolEntity : memberSchool) {
+            returnSchool.add(mySchoolEntity.toDomain());
+        }
+
+        return returnSchool;
     }
 }

@@ -14,6 +14,7 @@ import hello.my_self.mystack.entity.MyStackEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -37,26 +38,41 @@ public class MyStackRepositoryImpl implements MyStackRepository{
 
     @Override
     public MyStack findById(Long id) {
-        return null;
+        return myStackJpaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당 스택은 없습니다."))
+                .toDomain();
     }
 
     @Override
     public MyStack update(Long id, MyStackUpdateDto updateDto) {
-        return null;
+        MyStackEntity findStack = myStackJpaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당 스택은 없습니다."));
+
+        findStack.update(updateDto);
+        return findStack.toDomain();
     }
 
     @Override
     public MyStack findByName(String name) {
-        return null;
+        MyStackEntity findStack = myStackJpaRepository.findByName(name);
+        return findStack.toDomain();
     }
 
     @Override
     public void delete(Long id) {
-
+        MyStackEntity deleteEntity = myStackJpaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당 스택은 없습니다."));
+        myStackJpaRepository.delete(deleteEntity);
     }
 
     @Override
     public List<MyStack> findByMemberId(Long memberId) {
-        return myStackJpaRepository.findByMemberId(memberId);
+        List<MyStackEntity> memberStack = myStackJpaRepository.findByMemberId(memberId);
+        List<MyStack> returnStack = new ArrayList<>();
+        for (MyStackEntity myStackEntity : memberStack) {
+            returnStack.add(myStackEntity.toDomain());
+        }
+
+        return returnStack;
     }
 }

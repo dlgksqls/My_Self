@@ -9,10 +9,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MyProjectJpaRepository extends JpaRepository<MyProjectEntity, Long> {
-    MyProjectEntity findByName(String projectName);
+    @Query("select p from MyProjectEntity p where p.name = :projectName")
+    MyProjectEntity findByName(@Param("projectName") String projectName);
 
-    void deleteByName(String name);
-
-    @Query("select p from MyProjectEntity p join fetch p.memberEntity m where m.id =: memberId")
-    List<MyProject> findByMemberId(@Param("memberId") Long memberId);
+    @Query("select p from MyProjectEntity p join fetch p.memberEntity m where m.id = :memberId")
+    List<MyProjectEntity> findByMemberId(@Param("memberId") Long memberId);
 }

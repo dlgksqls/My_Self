@@ -2,6 +2,7 @@ package hello.my_self.myreward.entity;
 
 import hello.my_self.member.entity.MemberEntity;
 import hello.my_self.myreward.domain.MyReward;
+import hello.my_self.myreward.dto.MyRewardUpdateDto;
 import jakarta.persistence.*;
 
 import java.util.Optional;
@@ -44,5 +45,12 @@ public class MyRewardEntity {
                 .number(number)
                 .member(memberEntity.toDomain())
                 .build();
+    }
+
+    public void update(MyRewardUpdateDto reward){
+        if (reward.getName() != null) this.name = reward.getName();
+        if (reward.getHost() != null) this.host = reward.getHost();
+        if (reward.getNumber() != null) this.number = reward.getNumber();
+        if (reward.getDescription() != null) this.description = reward.getDescription();
     }
 }

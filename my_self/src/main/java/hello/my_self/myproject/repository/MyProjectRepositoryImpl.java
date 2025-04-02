@@ -8,6 +8,7 @@ import hello.my_self.myproject.entity.MyProjectEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -46,11 +47,19 @@ public class MyProjectRepositoryImpl implements MyProjectRepository{
 
     @Override
     public List<MyProject> findByMemberId(Long memberId) {
-        return myProjectJpaRepository.findByMemberId(memberId);
+        List<MyProjectEntity> memberProject = myProjectJpaRepository.findByMemberId(memberId);
+        List<MyProject> returnProject = new ArrayList<>();
+
+        for (MyProjectEntity myProjectEntity : memberProject) {
+            returnProject.add(myProjectEntity.toDomain());
+        }
+
+        return returnProject;
     }
 
     @Override
     public void delete(String name) {
-        myProjectJpaRepository.deleteByName(name);
+        MyProjectEntity deleteProject = myProjectJpaRepository.findByName(name);
+        myProjectJpaRepository.delete(deleteProject);
     }
 }
