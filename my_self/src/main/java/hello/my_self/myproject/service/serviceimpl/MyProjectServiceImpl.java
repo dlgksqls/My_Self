@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MyProjectServiceImpl implements MyProjectService {
@@ -49,5 +51,10 @@ public class MyProjectServiceImpl implements MyProjectService {
     @Transactional
     public void delete(String name) {
         myProjectRepository.delete(name);
+    }
+
+    @Override
+    public List<MyProject> findByMember(Long memberId) {
+        return myProjectRepository.findByMemberId(memberId);
     }
 }

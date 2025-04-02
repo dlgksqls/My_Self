@@ -4,12 +4,17 @@ import hello.my_self.member.domain.Member;
 import hello.my_self.member.entity.MemberEntity;
 import hello.my_self.myproject.domain.MyProject;
 import hello.my_self.myproject.dto.ProjectUpdateDto;
+import hello.my_self.mystack.entity.MyStackEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
+@Getter
 public class MyProjectEntity {
 
     @Id
@@ -25,6 +30,9 @@ public class MyProjectEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
+    @OneToMany(mappedBy = "myProjectEntity")
+    private List<MyStackEntity> myStackEntityList;
+
     public static MyProjectEntity toEntity(MyProject project, MemberEntity getMember) {
         MyProjectEntity myProjectEntity = new MyProjectEntity();
         myProjectEntity.name = project.getName();
@@ -33,6 +41,7 @@ public class MyProjectEntity {
         myProjectEntity.link = project.getLink();
         myProjectEntity.memberEntity = getMember;
         getMember.getMyProjectEntityList().add(myProjectEntity);
+        myProjectEntity.myStackEntityList = new ArrayList<>();
 //        myProjectEntity.memberEntity.getMyProjectEntityList().add(myProjectEntity);
 
         return myProjectEntity;

@@ -61,4 +61,11 @@ public class FakeMyRewardRepository implements MyRewardRepository {
     public void delete(String name) {
         data.removeIf(item -> item.getName().equals(name));
     }
+
+    @Override
+    public List<MyReward> findByMemberId(Long memberId) {
+        return data.stream()
+                .filter(reward -> reward.getMember().getId().equals(memberId))
+                .toList();
+    }
 }

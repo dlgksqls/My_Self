@@ -4,6 +4,8 @@ import hello.my_self.myproject.domain.MyProject;
 import hello.my_self.myproject.dto.ProjectCreateDto;
 import hello.my_self.myproject.dto.ProjectUpdateDto;
 
+import java.util.List;
+
 public interface MyProjectService {
     MyProject create(ProjectCreateDto createProjectDto);
 
@@ -14,4 +16,6 @@ public interface MyProjectService {
     void delete(String name);
 
     MyProject findById(Long id);
+
+    List<MyProject> findByMember(Long memberId);
 }

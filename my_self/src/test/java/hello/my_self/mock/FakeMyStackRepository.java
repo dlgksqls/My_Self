@@ -58,4 +58,11 @@ public class FakeMyStackRepository implements MyStackRepository {
     public void delete(Long id) {
         data.removeIf(stack -> stack.getId().equals(id));
     }
+
+    @Override
+    public List<MyStack> findByMemberId(Long memberId) {
+        return data.stream()
+                .filter(stack -> stack.getMember().getId().equals(memberId))
+                .toList();
+    }
 }

@@ -9,6 +9,7 @@ import hello.my_self.myschool.entity.MySchoolEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -49,5 +50,10 @@ public class MySchoolRepositoryImpl implements MySchoolRepository{
                 .orElseThrow(() -> new NoSuchElementException("해당 학교는 등록되지 않았습니다."));
 
         mySchoolJpaRepository.delete(mySchoolEntity);
+    }
+
+    @Override
+    public List<MySchool> findByMemberId(Long memberId) {
+        return mySchoolJpaRepository.findByMemberId(memberId);
     }
 }

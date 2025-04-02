@@ -8,6 +8,7 @@ import hello.my_self.myreward.entity.MyRewardEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -47,5 +48,10 @@ public class MyRewardRepositoryImpl implements MyRewardRepository{
     public void delete(String name) {
         MyReward myReward = myRewardJpaRepository.findByName(name);
         myRewardJpaRepository.delete(MyRewardEntity.toEntity(myReward, MemberEntity.toEntity(myReward.getMember())));
+    }
+
+    @Override
+    public List<MyReward> findByMemberId(Long memberId) {
+        return myRewardJpaRepository.findByMemberId(memberId);
     }
 }

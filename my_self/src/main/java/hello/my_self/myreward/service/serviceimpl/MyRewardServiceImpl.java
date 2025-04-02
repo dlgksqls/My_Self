@@ -10,6 +10,8 @@ import hello.my_self.myreward.service.MyRewardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MyRewardServiceImpl implements MyRewardService {
@@ -45,5 +47,10 @@ public class MyRewardServiceImpl implements MyRewardService {
     public void delete(String name) {
         MyReward findReward = myRewardRepository.findByName(name);
         myRewardRepository.delete(findReward.getName());
+    }
+
+    @Override
+    public List<MyReward> findByMember(Long memberId) {
+        return myRewardRepository.findByMemberId(memberId);
     }
 }

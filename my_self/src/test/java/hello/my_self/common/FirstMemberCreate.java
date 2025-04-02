@@ -20,6 +20,7 @@ public class FirstMemberCreate {
 
         Member newMember = new Member();
         newMember.create(member);
+        newMember.setId(1L);
         return newMember;
     }
 }

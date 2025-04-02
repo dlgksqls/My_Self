@@ -8,6 +8,7 @@ import hello.my_self.myproject.entity.MyProjectEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -41,6 +42,11 @@ public class MyProjectRepositoryImpl implements MyProjectRepository{
         Optional<MyProjectEntity> findProject = myProjectJpaRepository.findById(id);
         findProject.get().update(updateDto);
         return findProject.get().toDomain();
+    }
+
+    @Override
+    public List<MyProject> findByMemberId(Long memberId) {
+        return myProjectJpaRepository.findByMemberId(memberId);
     }
 
     @Override

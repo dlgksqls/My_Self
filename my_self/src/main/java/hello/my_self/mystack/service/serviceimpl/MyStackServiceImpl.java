@@ -12,6 +12,8 @@ import hello.my_self.mystack.service.MyStackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MyStackServiceImpl implements MyStackService {
@@ -48,5 +50,10 @@ public class MyStackServiceImpl implements MyStackService {
     @Override
     public void delete(Long id) {
         myStackRepository.delete(id);
+    }
+
+    @Override
+    public List<MyStack> findByMember(Long memberId) {
+        return myStackRepository.findByMemberId(memberId);
     }
 }

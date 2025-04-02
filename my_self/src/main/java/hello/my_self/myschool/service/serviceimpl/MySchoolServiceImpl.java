@@ -10,6 +10,8 @@ import hello.my_self.myschool.service.MySchoolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MySchoolServiceImpl implements MySchoolService {
@@ -39,5 +41,10 @@ public class MySchoolServiceImpl implements MySchoolService {
     @Override
     public void delete(Long id) {
         mySchoolRepository.delete(id);
+    }
+
+    @Override
+    public List<MySchool> findByMember(Long memberId) {
+        return mySchoolRepository.findByMemberId(memberId);
     }
 }

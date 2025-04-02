@@ -52,4 +52,11 @@ public class FakeMySchoolRepository implements MySchoolRepository {
     public void delete(Long id) {
         data.removeIf(mySchool -> mySchool.getId().equals(id));
     }
+
+    @Override
+    public List<MySchool> findByMemberId(Long memberId) {
+        return data.stream()
+                .filter(school -> school.getMember().getId().equals(memberId))
+                .toList();
+    }
 }

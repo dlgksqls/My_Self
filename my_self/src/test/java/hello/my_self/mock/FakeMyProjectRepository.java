@@ -56,6 +56,13 @@ public class FakeMyProjectRepository implements MyProjectRepository {
     }
 
     @Override
+    public List<MyProject> findByMemberId(Long memberId) {
+        return data.stream()
+                .filter(project -> project.getMember().getId().equals(memberId))
+                .toList();
+    }
+
+    @Override
     public void delete(String name) {
         data.removeIf(item -> item.getName().equals(name));
     }
