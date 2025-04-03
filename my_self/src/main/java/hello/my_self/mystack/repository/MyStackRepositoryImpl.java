@@ -24,16 +24,12 @@ public class MyStackRepositoryImpl implements MyStackRepository{
 
     private final MyStackJpaRepository myStackJpaRepository;
     private final MemberJpaRepository memberJpaRepository;
-    private final MyProjectJpaRepository myProjectJpaRepository;
     @Override
     public MyStack save(MyStack myStack) {
         MemberEntity member = memberJpaRepository.findById(myStack.getMember().getId())
                 .orElseThrow(() -> new NoSuchElementException("해당 멤버는 없습니다."));
 
-        MyProjectEntity project = myProjectJpaRepository.findById(myStack.getMyProject().getId())
-                .orElseThrow(() -> new NoSuchElementException("해당 프로젝트는 없습니다."));
-
-        return myStackJpaRepository.save(MyStackEntity.toEntity(myStack, member, project)).toDomain();
+        return myStackJpaRepository.save(MyStackEntity.toEntity(myStack, member)).toDomain();
     }
 
     @Override

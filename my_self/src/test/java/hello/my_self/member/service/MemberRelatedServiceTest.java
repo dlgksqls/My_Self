@@ -49,7 +49,7 @@ public class MemberRelatedServiceTest {
     MyProject project = FirstProjectCreate.createFirstProject(member);
     MyReward reward = FirstRewardCreate.createFirstReward(member);
     MySchool school = FirstSchoolCreate.createFirstSchool(member);
-    MyStack stack = FirstStackCreate.createFirstStack(member, project);
+    MyStack stack = FirstStackCreate.createFirstStack(member);
 
     @BeforeEach
     void init(){
@@ -66,7 +66,7 @@ public class MemberRelatedServiceTest {
         mySchoolService = new MySchoolServiceImpl(mySchoolRepository, memberRepository);
 
         myStackRepository = new FakeMyStackRepository();
-        myStackService = new MyStackServiceImpl(myStackRepository, memberRepository, myProjectRepository);
+        myStackService = new MyStackServiceImpl(myStackRepository, memberRepository);
 
         memberRelatedService = new MemberRelatedServiceImpl(
                 memberService, myProjectService, myRewardService, mySchoolService, myStackService

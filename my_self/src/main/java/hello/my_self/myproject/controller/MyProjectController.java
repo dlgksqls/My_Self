@@ -36,4 +36,9 @@ public class MyProjectController {
         MyProject updatedProject = myProjectService.update(id, updateProjectDto);
         return new ResponseEntity<>(MyProjectResponse.response(updatedProject), HttpStatus.ACCEPTED);
     }
+
+    @DeleteMapping("{name}")
+    public void delete(@PathVariable("name") String name){
+        myProjectService.delete(name);
+    }
 }

@@ -23,4 +23,18 @@ public class FirstProjectCreate {
         newProject.create(createDto, member);
         return newProject;
     }
+
+    public static MyProject createSecondProject(Member member){
+        ProjectCreateDto createDto = ProjectCreateDto.builder()
+                .name("web_shopping?")
+                .role("팀장")
+                .description("졸업작품")
+                .link("https://github.com/190000you/BE_AI_GO")
+                .memberId(member.getId())
+                .build();
+
+        MyProject newProject = new MyProject();
+        newProject.create(createDto, member);
+        return newProject;
+    }
 }

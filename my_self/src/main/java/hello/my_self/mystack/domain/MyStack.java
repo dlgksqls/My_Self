@@ -14,22 +14,19 @@ public class MyStack {
     private Long id;
     private String name;
     private Member member;
-    private MyProject myProject;
 
     public MyStack() {
     }
 
-    public MyStack(Long id, String name, Member member, MyProject myProject) {
+    public MyStack(Long id, String name, Member member) {
         this.id = id;
         this.name = name;
         this.member = member;
-        this.myProject = myProject;
     }
 
-    public void create(MyStackCreateDto createDto, Member member, MyProject myProject) {
+    public void create(MyStackCreateDto createDto, Member member) {
         this.name = createDto.getName();
         this.member = member;
-        this.myProject = myProject;
     }
 
     public void update(MyStackUpdateDto updateDto) {

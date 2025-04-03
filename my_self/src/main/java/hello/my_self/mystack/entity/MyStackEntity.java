@@ -4,7 +4,11 @@ import hello.my_self.member.entity.MemberEntity;
 import hello.my_self.myproject.entity.MyProjectEntity;
 import hello.my_self.mystack.domain.MyStack;
 import hello.my_self.mystack.dto.MyStackUpdateDto;
+import hello.my_self.projectstack.entity.ProjectStackEntity;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class MyStackEntity {
@@ -18,16 +22,14 @@ public class MyStackEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
-    private MyProjectEntity myProjectEntity;
+    @OneToMany(mappedBy = "myStackEntity")
+    private List<ProjectStackEntity> projectStackEntityList;
 
-    public static MyStackEntity toEntity(MyStack myStack, MemberEntity member, MyProjectEntity project) {
+    public static MyStackEntity toEntity(MyStack myStack, MemberEntity member) {
         MyStackEntity myStackEntity = new MyStackEntity();
         myStackEntity.name = myStack.getName();
         myStackEntity.memberEntity = member;
-        myStackEntity.myProjectEntity = project;
-        project.getMyStackEntityList().add(myStackEntity);
+        myStackEntity.projectStackEntityList = new ArrayList<>();
 
         return myStackEntity;
     }
@@ -37,7 +39,6 @@ public class MyStackEntity {
                 .id(id)
                 .name(name)
                 .member(memberEntity.toDomain())
-                .myProject(myProjectEntity.toDomain())
                 .build();
     }
 
