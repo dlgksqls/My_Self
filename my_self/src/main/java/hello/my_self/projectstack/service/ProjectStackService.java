@@ -10,7 +10,11 @@ public interface ProjectStackService {
 
     void allDelete(Long projectStackId);
 
+<<<<<<< HEAD
     List<ProjectStack> findByProjectId(Long projectId);
 
     void deleteByProjectIdAndStackId(Long projectId, Long stackId);
+=======
+    List<ProjectStack> findById(Long id);
+>>>>>>> origin/main
 }

@@ -16,6 +16,7 @@ public class FirstStackCreate {
 
         MyStack newStack = new MyStack();
         newStack.create(createDto, member);
+<<<<<<< HEAD
         return newStack;
     }
 
@@ -27,6 +28,8 @@ public class FirstStackCreate {
 
         MyStack newStack = new MyStack();
         newStack.create(createDto, member);
+=======
+>>>>>>> origin/main
         return newStack;
     }
 }

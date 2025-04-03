@@ -16,6 +16,7 @@ public class ProjectStackRepositoryImpl implements ProjectStackRepository {
     public ProjectStack findByProjectStackId(Long projectStackId) {
         return null;
     }
+<<<<<<< HEAD
     @Override
     public List<ProjectStack> findByProjectId(Long projectId) {
         return null;
@@ -25,13 +26,20 @@ public class ProjectStackRepositoryImpl implements ProjectStackRepository {
     public ProjectStack findByProjectIdAndStackId(Long projectId, Long stackId) {
         return null;
     }
+=======
+>>>>>>> origin/main
 
     @Override
     public void allDelete(Long projectStackId) {
     }
 
     @Override
+<<<<<<< HEAD
     public void deleteStackOnProject(Long projectId, Long stackId) {
 
+=======
+    public List<ProjectStack> findById(Long id) {
+        return null;
+>>>>>>> origin/main
     }
 }

@@ -3,7 +3,13 @@ package hello.my_self.mock;
 import hello.my_self.projectstack.domain.ProjectStack;
 import hello.my_self.projectstack.repository.ProjectStackRepository;
 
+<<<<<<< HEAD
 import java.util.*;
+=======
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+>>>>>>> origin/main
 import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeProjectStackRepository implements ProjectStackRepository {
@@ -35,6 +41,7 @@ public class FakeProjectStackRepository implements ProjectStackRepository {
     }
 
     @Override
+<<<<<<< HEAD
     public List<ProjectStack> findByProjectId(Long projectId) {
         List<ProjectStack> projectStack = data.stream()
                 .filter(ps -> Optional.ofNullable(ps.getProject())
@@ -62,14 +69,23 @@ public class FakeProjectStackRepository implements ProjectStackRepository {
     }
 
     @Override
+=======
+>>>>>>> origin/main
     public void allDelete(Long projectStackId) {
         data.removeIf(pj -> pj.getId().equals(projectStackId));
     }
 
     @Override
+<<<<<<< HEAD
     public void deleteStackOnProject(Long projectId, Long stackId) {
         data.removeIf(pj ->
             pj.getProject().getId().equals(projectId) && pj.getStack().getId().equals(stackId)
         );
+=======
+    public List<ProjectStack> findById(Long id) {
+        return data.stream()
+                .filter(pj -> pj.getId().equals(id))
+                .toList();
+>>>>>>> origin/main
     }
 }

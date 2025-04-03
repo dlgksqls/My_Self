@@ -21,7 +21,11 @@ import hello.my_self.projectstack.domain.ProjectStack;
 import hello.my_self.projectstack.dto.ProjectStackCreateDto;
 import hello.my_self.projectstack.repository.ProjectStackRepository;
 import hello.my_self.projectstack.service.serviceimpl.ProjectStackServiceImpl;
+<<<<<<< HEAD
 import lombok.extern.slf4j.Slf4j;
+=======
+import org.assertj.core.api.Assertions;
+>>>>>>> origin/main
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +35,7 @@ import java.util.NoSuchElementException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+<<<<<<< HEAD
 @Slf4j
 public class ProjectStackServiceTest {
 
@@ -39,6 +44,13 @@ public class ProjectStackServiceTest {
     MyProject project2;
     MyStack stack1;
     MyStack stack2;
+=======
+public class ProjectStackServiceTest {
+
+    Member member;
+    MyProject project;
+    MyStack stack;
+>>>>>>> origin/main
 
     private MemberRepository memberRepository;
     private MemberService memberService;
@@ -51,10 +63,15 @@ public class ProjectStackServiceTest {
     @BeforeEach
     void init(){
         member = FirstMemberCreate.createFirstMember();
+<<<<<<< HEAD
         project1 = FirstProjectCreate.createFirstProject(member);
         project2 = FirstProjectCreate.createSecondProject(member);
         stack1 = FirstStackCreate.createFirstStack(member);
         stack2 = FirstStackCreate.createSecondStack(member);
+=======
+        project = FirstProjectCreate.createFirstProject(member);
+        stack = FirstStackCreate.createFirstStack(member);
+>>>>>>> origin/main
 
         memberRepository = new FakeMemberRepository();
         memberService = new MemberServiceImpl(memberRepository);
@@ -68,40 +85,64 @@ public class ProjectStackServiceTest {
         projectStackService = new ProjectStackServiceImpl(myProjectRepository, myStackRepository, projectStackRepository);
 
         member = memberRepository.save(member);
+<<<<<<< HEAD
         project1 = myProjectRepository.save(project1);
         project2 = myProjectRepository.save(project2);
         stack1 = myStackRepository.save(stack1);
         stack2 = myStackRepository.save(stack2);
+=======
+        project = myProjectRepository.save(project);
+        stack = myStackRepository.save(stack);
+>>>>>>> origin/main
     }
 
     @Test
     public void ProjectStackService_create_로_새로운_연관관계를_생성할_수_있다(){
         // given
         ProjectStackCreateDto createDto = ProjectStackCreateDto.builder()
+<<<<<<< HEAD
                 .projectId(project1.getId())
                 .stackId(stack1.getId())
+=======
+                .projectId(project.getId())
+                .stackId(stack.getId())
+>>>>>>> origin/main
                 .build();
 
         // when
         ProjectStack pj = projectStackService.create(createDto);
 
         // then
+<<<<<<< HEAD
         assertThat(pj.getStack().getName()).isEqualTo(stack1.getName());
         assertThat(pj.getProject().getName()).isEqualTo(project1.getName());
+=======
+        assertThat(pj.getStack().getName()).isEqualTo(stack.getName());
+        assertThat(pj.getProject().getName()).isEqualTo(project.getName());
+>>>>>>> origin/main
     }
 
     @Test
     public void ProjectStackService_findById_로_연관관계를_찾을_수_있다() {
         // given
         ProjectStackCreateDto createDto = ProjectStackCreateDto.builder()
+<<<<<<< HEAD
                 .projectId(project1.getId())
                 .stackId(stack1.getId())
+=======
+                .projectId(project.getId())
+                .stackId(stack.getId())
+>>>>>>> origin/main
                 .build();
 
         ProjectStack pj = projectStackService.create(createDto);
 
         // when
+<<<<<<< HEAD
         List<ProjectStack> findPj = projectStackService.findByProjectId(pj.getId());
+=======
+        List<ProjectStack> findPj = projectStackService.findById(pj.getId());
+>>>>>>> origin/main
 
         // then
         for (ProjectStack projectStack : findPj) {
@@ -114,6 +155,7 @@ public class ProjectStackServiceTest {
     @Test
     public void ProjectStackService_delete_로_기존의_연관관계를_지울_수_있다(){
         // given
+<<<<<<< HEAD
         ProjectStackCreateDto createDto1 = ProjectStackCreateDto.builder()
                 .projectId(project1.getId())
                 .stackId(stack1.getId())
@@ -157,4 +199,21 @@ public class ProjectStackServiceTest {
         // then
         assertThat(projectStackService.findByProjectId(1L).size()).isEqualTo(1);
     }
+=======
+        ProjectStackCreateDto createDto = ProjectStackCreateDto.builder()
+                .projectId(project.getId())
+                .stackId(stack.getId())
+                .build();
+
+        ProjectStack pj = projectStackService.create(createDto);
+
+        // when
+        projectStackService.allDelete(pj.getId());
+
+        // then
+        assertThatThrownBy(() -> {
+            projectStackService.findById(pj.getId());
+        }).isInstanceOf(NoSuchElementException.class);
+    }
+>>>>>>> origin/main
 }

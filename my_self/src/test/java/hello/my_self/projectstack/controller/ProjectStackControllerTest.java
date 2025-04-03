@@ -24,6 +24,10 @@ import hello.my_self.projectstack.dto.ProjectStackResponseDto;
 import hello.my_self.projectstack.repository.ProjectStackRepository;
 import hello.my_self.projectstack.service.ProjectStackService;
 import hello.my_self.projectstack.service.serviceimpl.ProjectStackServiceImpl;
+<<<<<<< HEAD
+=======
+import org.assertj.core.api.Assertions;
+>>>>>>> origin/main
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -87,7 +91,10 @@ public class ProjectStackControllerTest {
 
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+<<<<<<< HEAD
         assertThat(result.getBody().getId()).isEqualTo(1L);
+=======
+>>>>>>> origin/main
         assertThat(result.getBody().getProjectName()).isEqualTo("가볼까?");
         assertThat(result.getBody().getStackName()).isEqualTo("Spring");
     }
@@ -107,7 +114,10 @@ public class ProjectStackControllerTest {
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
         for (ProjectStackResponseDto projectStackResponseDto : result.getBody()) {
+<<<<<<< HEAD
             assertThat(projectStackResponseDto.getId()).isEqualTo(1L);
+=======
+>>>>>>> origin/main
             assertThat(projectStackResponseDto.getProjectName()).isEqualTo("가볼까?");
             assertThat(projectStackResponseDto.getStackName()).isEqualTo("Spring");
         }
@@ -128,7 +138,11 @@ public class ProjectStackControllerTest {
 
         // then
         assertThatThrownBy(() -> {
+<<<<<<< HEAD
             projectStackService.findByProjectId(projectStack.getId());
+=======
+            projectStackService.findById(projectStack.getId());
+>>>>>>> origin/main
         }).isInstanceOf(NoSuchElementException.class);
     }
 }

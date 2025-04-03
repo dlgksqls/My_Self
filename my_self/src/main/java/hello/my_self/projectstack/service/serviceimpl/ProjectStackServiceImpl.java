@@ -39,6 +39,7 @@ public class ProjectStackServiceImpl implements ProjectStackService {
     }
 
     @Override
+<<<<<<< HEAD
     public List<ProjectStack> findByProjectId(Long projectId) {
         return projectStackRepository.findByProjectId(projectId);
     }
@@ -50,5 +51,9 @@ public class ProjectStackServiceImpl implements ProjectStackService {
 
         ProjectStack projectStack = projectStackRepository.findByProjectIdAndStackId(project.getId(), stack.getId());
         projectStackRepository.allDelete(projectStack.getId());
+=======
+    public List<ProjectStack> findById(Long id) {
+        return projectStackRepository.findById(id);
+>>>>>>> origin/main
     }
 }
