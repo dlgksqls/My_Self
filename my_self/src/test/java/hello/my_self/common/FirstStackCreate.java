@@ -8,15 +8,14 @@ import hello.my_self.mystack.dto.MyStackCreateDto;
 
 public class FirstStackCreate {
 
-    public static MyStack createFirstStack(Member member, MyProject myProject) {
+    public static MyStack createFirstStack(Member member) {
         MyStackCreateDto createDto = MyStackCreateDto.builder()
                 .name("Spring")
                 .memberId(1L)
-                .projectId(1L)
                 .build();
 
         MyStack newStack = new MyStack();
-        newStack.create(createDto, member, myProject);
+        newStack.create(createDto, member);
         return newStack;
     }
 }

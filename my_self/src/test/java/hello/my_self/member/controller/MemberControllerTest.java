@@ -68,7 +68,7 @@ public class MemberControllerTest {
         mySchoolService = new MySchoolServiceImpl(mySchoolRepository, memberRepository);
 
         myStackRepository = new FakeMyStackRepository();
-        myStackService = new MyStackServiceImpl(myStackRepository, memberRepository, myProjectRepository);
+        myStackService = new MyStackServiceImpl(myStackRepository, memberRepository);
 
         memberRelatedService = new MemberRelatedServiceImpl(
                 memberService, myProjectService, myRewardService, mySchoolService, myStackService

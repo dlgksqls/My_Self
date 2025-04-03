@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -20,14 +21,11 @@ public class MyStackServiceImpl implements MyStackService {
 
     private final MyStackRepository myStackRepository;
     private final MemberRepository memberRepository;
-    private final MyProjectRepository myProjectRepository;
     @Override
     public MyStack create(MyStackCreateDto createDto) {
         Member member = memberRepository.findById(createDto.getMemberId());
-        MyProject project = myProjectRepository.findById(createDto.getProjectId());
-
         MyStack myStack = new MyStack();
-        myStack.create(createDto, member, project);
+        myStack.create(createDto, member);
         return myStackRepository.save(myStack);
     }
 

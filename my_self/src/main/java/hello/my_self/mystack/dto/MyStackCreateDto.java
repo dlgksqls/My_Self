@@ -9,5 +9,4 @@ public class MyStackCreateDto {
 
     private String name;
     private Long memberId;
-    private Long projectId;
 }

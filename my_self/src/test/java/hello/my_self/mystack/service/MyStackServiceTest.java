@@ -51,7 +51,7 @@ public class MyStackServiceTest {
         myProjectService = new MyProjectServiceImpl(myProjectRepository, memberService);
 
         myStackRepository = new FakeMyStackRepository();
-        myStackService = new MyStackServiceImpl(myStackRepository, memberRepository, myProjectRepository);
+        myStackService = new MyStackServiceImpl(myStackRepository, memberRepository);
 
         member = FirstMemberCreate.createFirstMember();
         member = memberRepository.save(member);
@@ -62,8 +62,8 @@ public class MyStackServiceTest {
         createDto = MyStackCreateDto.builder()
                 .name("Spring")
                 .memberId(member.getId())
-                .projectId(project.getId())
                 .build();
+
     }
 
     @Test
@@ -75,7 +75,22 @@ public class MyStackServiceTest {
         // then
         assertThat(myStack.getName()).isEqualTo("Spring");
         assertThat(myStack.getMember().getName()).isEqualTo("이한빈");
-        assertThat(myStack.getMyProject().getName()).isEqualTo("가볼까?");
+    }
+
+    @Test
+    public void MyStackService_의_create_로_프로젝트가_없더라도_스택을_추가할_수_있다(){
+        // given
+        MyStackCreateDto createWithOutProjectDto = MyStackCreateDto.builder()
+                .name("MySql")
+                .memberId(1L)
+                .build();
+
+        // when
+        MyStack myStack = myStackService.create(createWithOutProjectDto);
+
+        // then
+        assertThat(myStack.getName()).isEqualTo("MySql");
+        assertThat(myStack.getMember().getName()).isEqualTo("이한빈");
     }
 
     @Test
@@ -89,7 +104,6 @@ public class MyStackServiceTest {
         // then
         assertThat(findStack.getName()).isEqualTo("Spring");
         assertThat(findStack.getMember().getName()).isEqualTo("이한빈");
-        assertThat(findStack.getMyProject().getName()).isEqualTo("가볼까?");
     }
 
     @Test
@@ -103,7 +117,6 @@ public class MyStackServiceTest {
         // then
         assertThat(findStack.getName()).isEqualTo("Spring");
         assertThat(findStack.getMember().getName()).isEqualTo("이한빈");
-        assertThat(findStack.getMyProject().getName()).isEqualTo("가볼까?");
     }
 
     @Test
@@ -130,7 +143,6 @@ public class MyStackServiceTest {
         // then
         assertThat(updateStack.getName()).isEqualTo("Django");
         assertThat(updateStack.getMember().getName()).isEqualTo("이한빈");
-        assertThat(updateStack.getMyProject().getName()).isEqualTo("가볼까?");
     }
 
     @Test

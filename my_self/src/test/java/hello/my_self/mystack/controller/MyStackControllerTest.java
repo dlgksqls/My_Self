@@ -52,7 +52,7 @@ public class MyStackControllerTest {
         myProjectService = new MyProjectServiceImpl(myProjectRepository, memberService);
 
         myStackRepository = new FakeMyStackRepository();
-        myStackService = new MyStackServiceImpl(myStackRepository, memberRepository, myProjectRepository);
+        myStackService = new MyStackServiceImpl(myStackRepository, memberRepository);
         myStackController = new MyStackController(myStackService);
 
         member = FirstMemberCreate.createFirstMember();
@@ -64,7 +64,6 @@ public class MyStackControllerTest {
         createDto = MyStackCreateDto.builder()
                 .name("Spring")
                 .memberId(member.getId())
-                .projectId(myProject.getId())
                 .build();
     }
 
@@ -79,7 +78,6 @@ public class MyStackControllerTest {
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(result.getBody().getName()).isEqualTo("Spring");
         assertThat(result.getBody().getMemberId()).isEqualTo(1L);
-        assertThat(result.getBody().getProjectId()).isEqualTo(1L);
     }
 
     @Test
@@ -98,7 +96,6 @@ public class MyStackControllerTest {
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
         assertThat(result.getBody().getName()).isEqualTo("Django");
         assertThat(result.getBody().getMemberId()).isEqualTo(1L);
-        assertThat(result.getBody().getProjectId()).isEqualTo(1L);
     }
 
     @Test

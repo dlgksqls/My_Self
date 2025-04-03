@@ -23,16 +23,14 @@ public class MyStackTest {
         MyStackCreateDto createDto = MyStackCreateDto.builder()
                 .name("Spring")
                 .memberId(1L)
-                .projectId(1L)
                 .build();
 
         // when
-        myStack.create(createDto, firstMember, myProject);
+        myStack.create(createDto, firstMember);
 
         // then
         assertThat(myStack.getName()).isEqualTo("Spring");
         assertThat(myStack.getMember().getName()).isEqualTo("이한빈");
-        assertThat(myStack.getMyProject().getName()).isEqualTo("가볼까?");
     }
 
     @Test
@@ -45,20 +43,18 @@ public class MyStackTest {
         MyStackCreateDto createDto = MyStackCreateDto.builder()
                 .name("Spring")
                 .memberId(1L)
-                .projectId(1L)
                 .build();
 
         MyStackUpdateDto updateDto = MyStackUpdateDto.builder()
                 .name("Django")
                 .build();
 
-        myStack.create(createDto, firstMember, myProject);
+        myStack.create(createDto, firstMember);
         // when
         myStack.update(updateDto);
 
         // then
         assertThat(myStack.getName()).isEqualTo("Django");
         assertThat(myStack.getMember().getName()).isEqualTo("이한빈");
-        assertThat(myStack.getMyProject().getName()).isEqualTo("가볼까?");
     }
 }
