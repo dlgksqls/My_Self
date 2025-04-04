@@ -73,7 +73,7 @@ public class FakeProjectStackRepository implements ProjectStackRepository {
     }
 
     @Override
-    public void deleteStackOnProject(Long projectId, Long stackId) {
+    public void deleteStackOnProjectIdAndStackId(Long projectId, Long stackId) {
         data.removeIf(pj ->
                 pj.getProject().getId().equals(projectId) && pj.getStack().getId().equals(stackId)
         );

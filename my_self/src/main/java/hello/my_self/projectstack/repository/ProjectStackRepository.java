@@ -10,7 +10,8 @@ public interface ProjectStackRepository {
     ProjectStack findByProjectStackId(Long projectStackId);
 
     void allDelete(Long projectStackId);
-    void deleteStackOnProject(Long projectId, Long stackId);
+
+    void deleteStackOnProjectIdAndStackId(Long projectId, Long stackId);
 
     List<ProjectStack> findByProjectId(Long projectId);
 

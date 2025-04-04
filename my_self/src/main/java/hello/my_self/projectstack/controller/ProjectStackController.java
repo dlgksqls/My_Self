@@ -26,18 +26,18 @@ public class ProjectStackController {
         return new ResponseEntity<>(ProjectStackCreateResponseDto.response(projectStack), HttpStatus.CREATED);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<List<ProjectStackResponseDto>> findById(@PathVariable("id") Long id) {
-        List<ProjectStack> resutList = projectStackService.findByProjectId(id);
+    @GetMapping("{projectId}")
+    public ResponseEntity<List<ProjectStackResponseDto>> findByProjectId(@PathVariable("projectId") Long projectId) {
+        List<ProjectStack> resutList = projectStackService.findByProjectId(projectId);
         List<ProjectStackResponseDto> returnList = new ArrayList<>();
         for (ProjectStack projectStack : resutList) {
-            Long pjId = projectStack.getId();
+            Long psId = projectStack.getId();
             String projectName = projectStack.getProject().getName();
             String stackName = projectStack.getStack().getName();
 
             returnList.add(
                     ProjectStackResponseDto.builder()
-                            .id(pjId)
+                            .id(psId)
                             .projectName(projectName)
                             .stackName(stackName)
                             .build()

@@ -6,11 +6,13 @@ import hello.my_self.mystack.domain.MyStack;
 import hello.my_self.mystack.dto.MyStackUpdateDto;
 import hello.my_self.projectstack.entity.ProjectStackEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 public class MyStackEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

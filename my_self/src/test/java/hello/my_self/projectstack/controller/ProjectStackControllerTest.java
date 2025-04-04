@@ -24,8 +24,6 @@ import hello.my_self.projectstack.dto.ProjectStackResponseDto;
 import hello.my_self.projectstack.repository.ProjectStackRepository;
 import hello.my_self.projectstack.service.ProjectStackService;
 import hello.my_self.projectstack.service.serviceimpl.ProjectStackServiceImpl;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -104,7 +102,7 @@ public class ProjectStackControllerTest {
         ProjectStack projectStack = projectStackService.create(createDto);
 
         // when
-        ResponseEntity<List<ProjectStackResponseDto>> result = projectStackController.findById(projectStack.getId());
+        ResponseEntity<List<ProjectStackResponseDto>> result = projectStackController.findByProjectId(projectStack.getId());
 
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
