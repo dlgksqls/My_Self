@@ -23,6 +23,7 @@ import hello.my_self.projectstack.repository.ProjectStackRepository;
 import hello.my_self.projectstack.service.serviceimpl.ProjectStackServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -50,12 +51,13 @@ public class ProjectStackServiceTest {
     private ProjectStackRepository projectStackRepository;
 
     @BeforeEach
-    void init(){
+    void init() {
         member = FirstMemberCreate.createFirstMember();
         project1 = FirstProjectCreate.createFirstProject(member);
         project2 = FirstProjectCreate.createSecondProject(member);
         stack1 = FirstStackCreate.createFirstStack(member);
         stack2 = FirstStackCreate.createSecondStack(member);
+
 
         memberRepository = new FakeMemberRepository();
         memberService = new MemberServiceImpl(memberRepository);
@@ -76,11 +78,12 @@ public class ProjectStackServiceTest {
     }
 
     @Test
-    public void ProjectStackService_create_로_새로운_연관관계를_생성할_수_있다(){
+    public void ProjectStackService_create_로_새로운_연관관계를_생성할_수_있다() {
         // given
         ProjectStackCreateDto createDto = ProjectStackCreateDto.builder()
                 .projectId(project1.getId())
                 .stackId(stack1.getId())
+
                 .build();
 
         // when
@@ -104,6 +107,7 @@ public class ProjectStackServiceTest {
         // when
         List<ProjectStack> findPj = projectStackService.findByProjectId(pj.getId());
 
+
         // then
         for (ProjectStack projectStack : findPj) {
             assertThat(projectStack.getId()).isEqualTo(pj.getId());
@@ -113,7 +117,7 @@ public class ProjectStackServiceTest {
     }
 
     @Test
-    public void ProjectStackService_delete_로_기존의_연관관계를_지울_수_있다(){
+    public void ProjectStackService_delete_로_기존의_연관관계를_지울_수_있다() {
         // given
         ProjectStackCreateDto createDto1 = ProjectStackCreateDto.builder()
                 .projectId(project1.getId())
@@ -137,7 +141,7 @@ public class ProjectStackServiceTest {
     }
 
     @Test
-    public void ProjectStackService_deleteByProjectIdAndStackId_로_기존의_연관관계를_지울_수_있다(){
+    public void ProjectStackService_deleteByProjectIdAndStackId_로_기존의_연관관계를_지울_수_있다() {
         // given
         ProjectStackCreateDto createDto1 = ProjectStackCreateDto.builder()
                 .projectId(project1.getId())

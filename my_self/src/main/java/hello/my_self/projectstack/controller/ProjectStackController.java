@@ -29,7 +29,6 @@ public class ProjectStackController {
     @GetMapping("{id}")
     public ResponseEntity<List<ProjectStackResponseDto>> findById(@PathVariable("id") Long id) {
         List<ProjectStack> resutList = projectStackService.findByProjectId(id);
-
         List<ProjectStackResponseDto> returnList = new ArrayList<>();
         for (ProjectStack projectStack : resutList) {
             Long pjId = projectStack.getId();
