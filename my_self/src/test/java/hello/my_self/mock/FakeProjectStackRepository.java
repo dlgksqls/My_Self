@@ -4,6 +4,9 @@ import hello.my_self.projectstack.domain.ProjectStack;
 import hello.my_self.projectstack.repository.ProjectStackRepository;
 
 import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeProjectStackRepository implements ProjectStackRepository {
@@ -69,7 +72,12 @@ public class FakeProjectStackRepository implements ProjectStackRepository {
     @Override
     public void deleteStackOnProject(Long projectId, Long stackId) {
         data.removeIf(pj ->
-            pj.getProject().getId().equals(projectId) && pj.getStack().getId().equals(stackId)
+                pj.getProject().getId().equals(projectId) && pj.getStack().getId().equals(stackId)
         );
+    }
+    public List<ProjectStack> findById(Long id) {
+        return data.stream()
+                .filter(pj -> pj.getId().equals(id))
+                .toList();
     }
 }

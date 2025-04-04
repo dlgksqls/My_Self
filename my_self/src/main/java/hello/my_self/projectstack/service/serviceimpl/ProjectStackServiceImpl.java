@@ -50,5 +50,11 @@ public class ProjectStackServiceImpl implements ProjectStackService {
 
         ProjectStack projectStack = projectStackRepository.findByProjectIdAndStackId(project.getId(), stack.getId());
         projectStackRepository.allDelete(projectStack.getId());
+
+    }
+
+    @Override
+    public List<ProjectStack> findById(Long id) {
+        return projectStackRepository.findById(id);
     }
 }

@@ -34,4 +34,8 @@ public class ProjectStackRepositoryImpl implements ProjectStackRepository {
     public void deleteStackOnProject(Long projectId, Long stackId) {
 
     }
+
+    public List<ProjectStack> findById(Long id) {
+        return null;
+    }
 }

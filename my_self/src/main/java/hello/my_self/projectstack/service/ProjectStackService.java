@@ -13,4 +13,5 @@ public interface ProjectStackService {
     List<ProjectStack> findByProjectId(Long projectId);
 
     void deleteByProjectIdAndStackId(Long projectId, Long stackId);
+    List<ProjectStack> findById(Long id);
 }
