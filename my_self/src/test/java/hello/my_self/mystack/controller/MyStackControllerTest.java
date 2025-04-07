@@ -13,16 +13,14 @@ import hello.my_self.myproject.domain.MyProject;
 import hello.my_self.myproject.repository.MyProjectRepository;
 import hello.my_self.myproject.service.MyProjectService;
 import hello.my_self.myproject.service.serviceimpl.MyProjectServiceImpl;
-import hello.my_self.myschool.dto.SchoolCreateDto;
 import hello.my_self.mystack.domain.MyStack;
 import hello.my_self.mystack.dto.MyStackCreateDto;
 import hello.my_self.mystack.dto.MyStackCreateResponseDto;
-import hello.my_self.mystack.dto.MyStackResponseDto;
+import hello.my_self.mystack.dto.MyStackResponse;
 import hello.my_self.mystack.dto.MyStackUpdateDto;
 import hello.my_self.mystack.repository.MyStackRepository;
 import hello.my_self.mystack.service.MyStackService;
 import hello.my_self.mystack.service.serviceimpl.MyStackServiceImpl;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -89,7 +87,7 @@ public class MyStackControllerTest {
                 .build();
 
         // when
-        ResponseEntity<MyStackResponseDto> result =
+        ResponseEntity<MyStackResponse> result =
                 myStackController.update(myStack.getId(), updateDto);
 
         // then

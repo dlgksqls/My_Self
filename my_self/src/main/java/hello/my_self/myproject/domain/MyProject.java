@@ -53,4 +53,12 @@ public class MyProject {
             this.link = updateProject.getLink();
         }
     }
+
+    public void createFirstProject(Member member) {
+        this.name = "가볼까?";
+        this.role = "팀장";
+        this.description = "졸업작품";
+        this.member = member;
+        this.link = "github";
+    }
 }

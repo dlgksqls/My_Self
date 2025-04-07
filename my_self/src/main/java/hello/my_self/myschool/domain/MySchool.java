@@ -54,4 +54,12 @@ public class MySchool {
             this.graduation_date = updateDto.getGraduation_date();
         }
     }
+
+    public void createFirstSchool(Member member) {
+        this.name = "계명대학교";
+        this.major = "컴공";
+        this.score = 4.5;
+        this.graduation_date = LocalDate.of(1999, 12, 6);
+        this.member = member;
+    }
 }

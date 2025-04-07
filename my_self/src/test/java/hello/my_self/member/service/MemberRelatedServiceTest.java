@@ -8,18 +8,22 @@ import hello.my_self.member.service.serviceimpl.MemberRelatedServiceImpl;
 import hello.my_self.member.service.serviceimpl.MemberServiceImpl;
 import hello.my_self.mock.*;
 import hello.my_self.myproject.domain.MyProject;
+import hello.my_self.myproject.dto.MyProjectResponse;
 import hello.my_self.myproject.repository.MyProjectRepository;
 import hello.my_self.myproject.service.MyProjectService;
 import hello.my_self.myproject.service.serviceimpl.MyProjectServiceImpl;
 import hello.my_self.myreward.domain.MyReward;
+import hello.my_self.myreward.dto.MyRewardResponse;
 import hello.my_self.myreward.repository.MyRewardRepository;
 import hello.my_self.myreward.service.MyRewardService;
 import hello.my_self.myreward.service.serviceimpl.MyRewardServiceImpl;
 import hello.my_self.myschool.domain.MySchool;
+import hello.my_self.myschool.dto.MySchoolResponse;
 import hello.my_self.myschool.repository.MySchoolRepository;
 import hello.my_self.myschool.service.MySchoolService;
 import hello.my_self.myschool.service.serviceimpl.MySchoolServiceImpl;
 import hello.my_self.mystack.domain.MyStack;
+import hello.my_self.mystack.dto.MyStackResponse;
 import hello.my_self.mystack.repository.MyStackRepository;
 import hello.my_self.mystack.service.MyStackService;
 import hello.my_self.mystack.service.serviceimpl.MyStackServiceImpl;
@@ -86,23 +90,35 @@ public class MemberRelatedServiceTest {
         MemberRelatedDto memberRelatedDto = memberRelatedService.viewAllRelation(member.getId());
 
         // then
-        for (MyProject memberRelatedDtoProject : memberRelatedDto.getProjects()) {
+        for (MyProjectResponse memberRelatedDtoProject : memberRelatedDto.getProjects()) {
             log.info(memberRelatedDtoProject.getName());
         }
-        for (MyReward memberRelatedDtoReward : memberRelatedDto.getRewards()) {
+        for (MyRewardResponse memberRelatedDtoReward : memberRelatedDto.getRewards()) {
             log.info(memberRelatedDtoReward.getName());
         }
-        for (MySchool memberRelatedDtoSchool : memberRelatedDto.getSchools()) {
+        for (MySchoolResponse memberRelatedDtoSchool : memberRelatedDto.getSchools()) {
             log.info(memberRelatedDtoSchool.getName());
         }
-        for (MyStack memberRelatedDtoStack : memberRelatedDto.getStacks()) {
+        for (MyStackResponse memberRelatedDtoStack : memberRelatedDto.getStacks()) {
             log.info(memberRelatedDtoStack.getName());
         }
 
         assertThat(memberRelatedDto.getMember()).isEqualTo(member);
-        assertThat(memberRelatedDto.getProjects()).contains(project);
-        assertThat(memberRelatedDto.getSchools()).contains(school);
-        assertThat(memberRelatedDto.getRewards()).contains(reward);
-        assertThat(memberRelatedDto.getStacks()).contains(stack);
+
+        for (MyProjectResponse project : memberRelatedDto.getProjects()) {
+            assertThat(project.getName()).isEqualTo("가볼까?");
+        }
+
+        for (MyRewardResponse reward : memberRelatedDto.getRewards()) {
+            assertThat(reward.getName()).isEqualTo("장려상");
+        }
+
+        for (MySchoolResponse school : memberRelatedDto.getSchools()) {
+            assertThat(school.getName()).isEqualTo("계명대학교");
+        }
+
+        for (MyStackResponse stack : memberRelatedDto.getStacks()) {
+            assertThat(stack.getName()).isEqualTo("Spring");
+        }
     }
 }

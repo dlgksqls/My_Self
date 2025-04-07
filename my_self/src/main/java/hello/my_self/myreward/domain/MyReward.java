@@ -44,4 +44,12 @@ public class MyReward {
         if (reward.getNumber() != null) this.number = reward.getNumber();
         if (reward.getDescription() != null) this.description = reward.getDescription();
     }
+
+    public void createFirstReward(Member member) {
+        this.name = "장려상";
+        this.host = "계명대학교";
+        this.number = "KF_88";
+        this.description = "캡스톤 디자인 수상";
+        this.member = member;
+    }
 }

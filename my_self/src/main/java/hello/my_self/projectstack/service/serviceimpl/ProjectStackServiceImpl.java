@@ -10,6 +10,7 @@ import hello.my_self.projectstack.repository.ProjectStackRepository;
 import hello.my_self.projectstack.service.ProjectStackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ProjectStackServiceImpl implements ProjectStackService {
 
 
     @Override
+    @Transactional
     public ProjectStack create(ProjectStackCreateDto createDto) {
         MyProject project = myProjectRepository.findById(createDto.getProjectId());
         MyStack stack = myStackRepository.findById(createDto.getStackId());
@@ -33,6 +35,7 @@ public class ProjectStackServiceImpl implements ProjectStackService {
     }
 
     @Override
+    @Transactional
     public void allDelete(Long projectStackId) {
         ProjectStack projectStack = projectStackRepository.findByProjectStackId(projectStackId);
         projectStackRepository.allDelete(projectStack.getId());
@@ -44,13 +47,13 @@ public class ProjectStackServiceImpl implements ProjectStackService {
     }
 
     @Override
+    @Transactional
     public void deleteByProjectIdAndStackId(Long projectId, Long stackId) {
         MyProject project = myProjectRepository.findById(projectId);
         MyStack stack = myStackRepository.findById(stackId);
 
         ProjectStack projectStack = projectStackRepository.findByProjectIdAndStackId(project.getId(), stack.getId());
         projectStackRepository.allDelete(projectStack.getId());
-
     }
 
     @Override

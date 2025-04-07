@@ -13,7 +13,7 @@ public interface MyProjectService {
 
     MyProject update(Long id, ProjectUpdateDto projectUpdateDto);
 
-    void delete(String name);
+    void delete(Long id);
 
     MyProject findById(Long id);
 

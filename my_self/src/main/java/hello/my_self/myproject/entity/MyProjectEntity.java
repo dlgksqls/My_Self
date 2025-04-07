@@ -31,7 +31,7 @@ public class MyProjectEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
-    @OneToMany(mappedBy = "myProjectEntity")
+    @OneToMany(mappedBy = "myProjectEntity", cascade = CascadeType.REMOVE)
     private List<ProjectStackEntity> projectStackEntityList;
 
     public static MyProjectEntity toEntity(MyProject project, MemberEntity getMember) {

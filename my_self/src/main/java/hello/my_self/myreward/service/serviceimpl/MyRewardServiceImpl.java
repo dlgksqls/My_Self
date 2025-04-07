@@ -9,6 +9,7 @@ import hello.my_self.myreward.repository.MyRewardRepository;
 import hello.my_self.myreward.service.MyRewardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class MyRewardServiceImpl implements MyRewardService {
     private final MemberService memberService;
 
     @Override
+    @Transactional
     public MyReward create(MyRewardCreateDto createRewardDto) {
         Member member = memberService.findById(createRewardDto.getMemberId());
         MyReward myReward = new MyReward();
@@ -38,12 +40,14 @@ public class MyRewardServiceImpl implements MyRewardService {
     }
 
     @Override
+    @Transactional
     public MyReward update(String name, MyRewardUpdateDto myRewardUpdateDto) {
         MyReward findReward = myRewardRepository.findByName(name);
         return myRewardRepository.update(findReward.getName(), myRewardUpdateDto);
     }
 
     @Override
+    @Transactional
     public void delete(String name) {
         MyReward findReward = myRewardRepository.findByName(name);
         myRewardRepository.delete(findReward.getName());

@@ -3,7 +3,7 @@ package hello.my_self.mystack.controller;
 import hello.my_self.mystack.domain.MyStack;
 import hello.my_self.mystack.dto.MyStackCreateDto;
 import hello.my_self.mystack.dto.MyStackCreateResponseDto;
-import hello.my_self.mystack.dto.MyStackResponseDto;
+import hello.my_self.mystack.dto.MyStackResponse;
 import hello.my_self.mystack.dto.MyStackUpdateDto;
 import hello.my_self.mystack.service.MyStackService;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +25,9 @@ public class MyStackController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<MyStackResponseDto> update(@PathVariable("id") Long id, MyStackUpdateDto updateDto) {
+    public ResponseEntity<MyStackResponse> update(@PathVariable("id") Long id, MyStackUpdateDto updateDto) {
         MyStack myStack = myStackService.update(id, updateDto);
-        return new ResponseEntity<>(MyStackResponseDto.response(myStack), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(MyStackResponse.response(myStack), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("{id}")

@@ -58,8 +58,9 @@ public class MyProjectRepositoryImpl implements MyProjectRepository{
     }
 
     @Override
-    public void delete(String name) {
-        MyProjectEntity deleteProject = myProjectJpaRepository.findByName(name);
+    public void delete(Long id) {
+        MyProjectEntity deleteProject = myProjectJpaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당 프로젝트는 없습니다."));
         myProjectJpaRepository.delete(deleteProject);
     }
 }

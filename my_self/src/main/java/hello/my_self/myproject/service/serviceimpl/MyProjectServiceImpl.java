@@ -49,8 +49,8 @@ public class MyProjectServiceImpl implements MyProjectService {
 
     @Override
     @Transactional
-    public void delete(String name) {
-        myProjectRepository.delete(name);
+    public void delete(Long id) {
+        myProjectRepository.delete(id);
     }
 
     @Override

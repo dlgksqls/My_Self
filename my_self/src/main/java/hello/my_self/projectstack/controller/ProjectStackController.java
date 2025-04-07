@@ -27,28 +27,41 @@ public class ProjectStackController {
     }
 
     @GetMapping("{projectId}")
-    public ResponseEntity<List<ProjectStackResponseDto>> findByProjectId(@PathVariable("projectId") Long projectId) {
-        List<ProjectStack> resutList = projectStackService.findByProjectId(projectId);
-        List<ProjectStackResponseDto> returnList = new ArrayList<>();
-        for (ProjectStack projectStack : resutList) {
-            Long psId = projectStack.getId();
-            String projectName = projectStack.getProject().getName();
-            String stackName = projectStack.getStack().getName();
+    public ResponseEntity<ProjectStackResponseDto> findByProjectId(@PathVariable("projectId") Long projectId) {
+        List<ProjectStack> resultList = projectStackService.findByProjectId(projectId);
 
-            returnList.add(
-                    ProjectStackResponseDto.builder()
-                            .id(psId)
-                            .projectName(projectName)
-                            .stackName(stackName)
-                            .build()
-            );
+        if (resultList.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(returnList, HttpStatus.ACCEPTED);
+        String projectName = resultList.get(0).getProject().getName();
+
+        ProjectStackResponseDto dto = ProjectStackResponseDto.builder()
+                .projectName(projectName)
+                .stackName(new ArrayList<>())
+                .build();
+
+        for (ProjectStack projectStack : resultList) {
+            if (projectStack.getStack() != null) {
+                dto.getStackName().add(projectStack.getStack().getName());
+            }
+        }
+
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+
     @DeleteMapping("")
-    public void allDelete(Long pjId){
+    public ResponseEntity<String> deleteByProjectId(Long pjId){
         projectStackService.allDelete(pjId);
+        return new ResponseEntity<>("삭제 완료", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/projects/{pjId}/stacks/{stId}")
+    public ResponseEntity<String> deleteByProjectStack(
+            @PathVariable("pjId") Long pjId,
+            @PathVariable("stId") Long stId){
+        projectStackService.deleteByProjectIdAndStackId(pjId, stId);
+        return new ResponseEntity<>("삭제 완료", HttpStatus.OK);
     }
 }

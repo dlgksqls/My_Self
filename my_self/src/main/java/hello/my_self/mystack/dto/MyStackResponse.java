@@ -6,13 +6,13 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class MyStackResponseDto {
+public class MyStackResponse {
 
     private String name;
     private Long memberId;
 
-    public static MyStackResponseDto response(MyStack myStack){
-        return MyStackResponseDto.builder()
+    public static MyStackResponse response(MyStack myStack){
+        return MyStackResponse.builder()
                 .name(myStack.getName())
                 .memberId(myStack.getMember().getId())
                 .build();

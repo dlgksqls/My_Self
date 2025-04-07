@@ -47,6 +47,7 @@ public class Member {
     }
 
     public void createFistMember() {
+        this.id = 1L;
         this.name = "lee";
         this.birth = LocalDate.of(1999, 12, 03);
         this.age = 13;

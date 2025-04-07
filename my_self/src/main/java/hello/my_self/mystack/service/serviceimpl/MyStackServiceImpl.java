@@ -11,6 +11,7 @@ import hello.my_self.mystack.repository.MyStackRepository;
 import hello.my_self.mystack.service.MyStackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -22,6 +23,7 @@ public class MyStackServiceImpl implements MyStackService {
     private final MyStackRepository myStackRepository;
     private final MemberRepository memberRepository;
     @Override
+    @Transactional
     public MyStack create(MyStackCreateDto createDto) {
         Member member = memberRepository.findById(createDto.getMemberId());
         MyStack myStack = new MyStack();
@@ -30,6 +32,7 @@ public class MyStackServiceImpl implements MyStackService {
     }
 
     @Override
+    @Transactional
     public MyStack update(Long id, MyStackUpdateDto updateDto) {
         MyStack myStack = myStackRepository.findById(id);
         return myStackRepository.update(myStack.getId(), updateDto);
@@ -46,6 +49,7 @@ public class MyStackServiceImpl implements MyStackService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         myStackRepository.delete(id);
     }

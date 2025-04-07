@@ -8,13 +8,10 @@ import hello.my_self.member.service.MemberService;
 import hello.my_self.member.service.serviceimpl.MemberServiceImpl;
 import hello.my_self.mock.FakeMemberRepository;
 import hello.my_self.mock.FakeMyRewardRepository;
-import hello.my_self.myproject.domain.MyProject;
-import hello.my_self.myproject.dto.MyProjectResponse;
-import hello.my_self.myproject.dto.ProjectCreateDto;
 import hello.my_self.myreward.domain.MyReward;
 import hello.my_self.myreward.dto.MyRewardCreateDto;
 import hello.my_self.myreward.dto.MyRewardCreateResponseDto;
-import hello.my_self.myreward.dto.MyRewardResponseDto;
+import hello.my_self.myreward.dto.MyRewardResponse;
 import hello.my_self.myreward.dto.MyRewardUpdateDto;
 import hello.my_self.myreward.repository.MyRewardRepository;
 import hello.my_self.myreward.service.MyRewardService;
@@ -102,7 +99,7 @@ public class MyRewardControllerTest {
         MyReward myReward = myRewardService.create(createRewardDto);
 
         // when
-        ResponseEntity<MyRewardResponseDto> result = myRewardController.getRewardById(myReward.getName());
+        ResponseEntity<MyRewardResponse> result = myRewardController.getRewardById(myReward.getName());
 
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -141,7 +138,7 @@ public class MyRewardControllerTest {
                 .build();
 
         // when
-        ResponseEntity<MyRewardResponseDto> result = myRewardController.update(reward.getName(), myRewardUpdateDto);
+        ResponseEntity<MyRewardResponse> result = myRewardController.update(reward.getName(), myRewardUpdateDto);
 
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);

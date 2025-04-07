@@ -10,7 +10,7 @@ public interface MyProjectRepository {
 
     MyProject findByName(String projectName);
 
-    void delete(String name);
+    void delete(Long id);
 
     MyProject findById(Long id);
     MyProject update(Long id, ProjectUpdateDto updateDto);

@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class MyRewardResponseDto {
+public class MyRewardResponse {
 
     private String name;
     private String host;
@@ -15,8 +15,8 @@ public class MyRewardResponseDto {
     private String description;
     private String memberName;
 
-    public static MyRewardResponseDto response(MyReward newReward) {
-        return MyRewardResponseDto.builder()
+    public static MyRewardResponse response(MyReward newReward) {
+        return MyRewardResponse.builder()
                 .name(newReward.getName())
                 .host(newReward.getHost())
                 .number(newReward.getNumber())

@@ -37,8 +37,9 @@ public class MyProjectController {
         return new ResponseEntity<>(MyProjectResponse.response(updatedProject), HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("{name}")
-    public void delete(@PathVariable("name") String name){
-        myProjectService.delete(name);
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+        myProjectService.delete(id);
+        return new ResponseEntity<>("삭제 완료", HttpStatus.OK);
     }
 }

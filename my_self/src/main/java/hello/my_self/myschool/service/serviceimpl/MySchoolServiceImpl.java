@@ -9,6 +9,7 @@ import hello.my_self.myschool.repository.MySchoolRepository;
 import hello.my_self.myschool.service.MySchoolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class MySchoolServiceImpl implements MySchoolService {
     private final MemberRepository memberRepository;
 
     @Override
+    @Transactional
     public MySchool create(SchoolCreateDto createDto) {
         Member member = memberRepository.findById(createDto.getMemberId());
         MySchool mySchool = new MySchool();
@@ -33,12 +35,14 @@ public class MySchoolServiceImpl implements MySchoolService {
     }
 
     @Override
+    @Transactional
     public MySchool update(Long id, SchoolUpdateDto updateDto) {
         MySchool findSchool = mySchoolRepository.findById(id);
         return mySchoolRepository.update(findSchool.getId(), updateDto);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         mySchoolRepository.delete(id);
     }

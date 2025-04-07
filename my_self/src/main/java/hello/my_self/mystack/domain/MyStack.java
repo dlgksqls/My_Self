@@ -32,4 +32,9 @@ public class MyStack {
     public void update(MyStackUpdateDto updateDto) {
         if (updateDto.getName() != null) this.name = updateDto.getName();
     }
+
+    public void createFirstStack(Member member) {
+        this.name = "Spring";
+        this.member = member;
+    }
 }

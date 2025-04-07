@@ -63,7 +63,7 @@ public class FakeMyProjectRepository implements MyProjectRepository {
     }
 
     @Override
-    public void delete(String name) {
-        data.removeIf(item -> item.getName().equals(name));
+    public void delete(Long id) {
+        data.removeIf(item -> item.getName().equals(id));
     }
 }

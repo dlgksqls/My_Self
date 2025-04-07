@@ -29,7 +29,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -102,14 +101,14 @@ public class ProjectStackControllerTest {
         ProjectStack projectStack = projectStackService.create(createDto);
 
         // when
-        ResponseEntity<List<ProjectStackResponseDto>> result = projectStackController.findByProjectId(projectStack.getId());
+        ResponseEntity<ProjectStackResponseDto> result = projectStackController.findByProjectId(projectStack.getId());
 
         // then
-        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
-        for (ProjectStackResponseDto projectStackResponseDto : result.getBody()) {
-            assertThat(projectStackResponseDto.getId()).isEqualTo(1L);
-            assertThat(projectStackResponseDto.getProjectName()).isEqualTo("가볼까?");
-            assertThat(projectStackResponseDto.getStackName()).isEqualTo("Spring");
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(result.getBody().getProjectName()).isEqualTo("가볼까?");
+
+        for (String s : result.getBody().getStackName()) {
+            assertThat(s).isEqualTo("Spring");
         }
     }
 
@@ -124,7 +123,7 @@ public class ProjectStackControllerTest {
         ProjectStack projectStack = projectStackService.create(createDto);
 
         // when
-        projectStackController.allDelete(projectStack.getId());
+        projectStackController.deleteByProjectId(projectStack.getId());
 
         // then
         assertThatThrownBy(() -> {

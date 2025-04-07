@@ -27,4 +27,9 @@ public class ProjectStack {
         this.project = project;
         this.stack = stack;
     }
+
+    public void createFirstProjectStack(MyProject myProject, MyStack myStack) {
+        this.project = myProject;
+        this.stack = myStack;
+    }
 }
