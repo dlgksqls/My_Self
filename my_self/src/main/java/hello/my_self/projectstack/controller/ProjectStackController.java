@@ -2,8 +2,9 @@ package hello.my_self.projectstack.controller;
 
 import hello.my_self.projectstack.domain.ProjectStack;
 import hello.my_self.projectstack.dto.ProjectStackCreateDto;
-import hello.my_self.projectstack.dto.ProjectStackCreateResponseDto;
-import hello.my_self.projectstack.dto.ProjectStackResponseDto;
+import hello.my_self.projectstack.dto.ProjectStackCreateResponse;
+import hello.my_self.projectstack.dto.MultiProjectStackResponse;
+import hello.my_self.projectstack.dto.SingleProjectStackResponse;
 import hello.my_self.projectstack.service.ProjectStackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,14 +22,20 @@ public class ProjectStackController {
     private final ProjectStackService projectStackService;
 
     @PostMapping("")
-    public ResponseEntity<ProjectStackCreateResponseDto> create(ProjectStackCreateDto createDto) {
+    public ResponseEntity<ProjectStackCreateResponse> create(ProjectStackCreateDto createDto) {
         ProjectStack projectStack = projectStackService.create(createDto);
-        return new ResponseEntity<>(ProjectStackCreateResponseDto.response(projectStack), HttpStatus.CREATED);
+        return new ResponseEntity<>(ProjectStackCreateResponse.response(projectStack), HttpStatus.CREATED);
     }
 
-    @GetMapping("{projectId}")
-    public ResponseEntity<ProjectStackResponseDto> findByProjectId(@PathVariable("projectId") Long projectId) {
-        List<ProjectStack> resultList = projectStackService.findByProjectId(projectId);
+    @GetMapping("{psId}")
+    public ResponseEntity<SingleProjectStackResponse> findById(@PathVariable("psId") Long psId){
+        ProjectStack projectStack = projectStackService.findById(psId);
+        return new ResponseEntity<>(SingleProjectStackResponse.response(projectStack), HttpStatus.OK);
+    }
+
+    @GetMapping("/projects/{pjId}")
+    public ResponseEntity<MultiProjectStackResponse> findByProjectId(@PathVariable("pjId") Long pjId) {
+        List<ProjectStack> resultList = projectStackService.findByProjectId(pjId);
 
         if (resultList.isEmpty()) {
             return new ResponseEntity<>(null, HttpStatus.OK);
@@ -36,7 +43,7 @@ public class ProjectStackController {
 
         String projectName = resultList.get(0).getProject().getName();
 
-        ProjectStackResponseDto dto = ProjectStackResponseDto.builder()
+        MultiProjectStackResponse dto = MultiProjectStackResponse.builder()
                 .projectName(projectName)
                 .stackName(new ArrayList<>())
                 .build();
@@ -50,17 +57,27 @@ public class ProjectStackController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @DeleteMapping("/ps/{psId}")
+    public ResponseEntity<String> deleteByPsId(
+            @PathVariable("psId") Long psId
+    ) {
+        projectStackService.deleteByPsId(psId);
+        return new ResponseEntity<>("삭제 완료", HttpStatus.OK);
+    }
 
-    @DeleteMapping("")
-    public ResponseEntity<String> deleteByProjectId(Long pjId){
-        projectStackService.allDelete(pjId);
+    @DeleteMapping("/projects/{pjId}")
+    public ResponseEntity<String> deleteByProjectId(
+            @PathVariable("pjId") Long pjId
+    ){
+        projectStackService.deleteByProjectId(pjId);
         return new ResponseEntity<>("삭제 완료", HttpStatus.OK);
     }
 
     @DeleteMapping("/projects/{pjId}/stacks/{stId}")
-    public ResponseEntity<String> deleteByProjectStack(
+    public ResponseEntity<String> deleteByProjectIdAndStackId(
             @PathVariable("pjId") Long pjId,
-            @PathVariable("stId") Long stId){
+            @PathVariable("stId") Long stId
+    ){
         projectStackService.deleteByProjectIdAndStackId(pjId, stId);
         return new ResponseEntity<>("삭제 완료", HttpStatus.OK);
     }

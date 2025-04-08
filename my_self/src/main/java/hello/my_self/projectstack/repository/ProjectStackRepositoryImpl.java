@@ -37,14 +37,9 @@ public class ProjectStackRepositoryImpl implements ProjectStackRepository {
     }
 
     @Override
-    public List<ProjectStack> findById(Long id) {
-        return null;
-    }
-
-    @Override
-    public ProjectStack findByProjectStackId(Long projectStackId) {
-        return projectStackJpaRepository.findById(projectStackId)
-                .orElseThrow(() -> new NoSuchElementException("해당 관계를 찾을 수 없습니다.")).toDomain();
+    public ProjectStack findById(Long id) {
+        return projectStackJpaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당 연관관계는 없습니다.")).toDomain();
     }
     @Override
     public List<ProjectStack> findByProjectId(Long projectId) {
@@ -74,22 +69,20 @@ public class ProjectStackRepositoryImpl implements ProjectStackRepository {
     }
 
     @Override
-    public void allDelete(Long projectStackId) {
-        ProjectStackEntity projectStackEntity = projectStackJpaRepository.findById(projectStackId)
-                .orElseThrow(() -> new NoSuchElementException("해당 관계를 찾을 수 없습니다"));
+    public void delete(Long id) {
+        ProjectStackEntity projectStackEntity = projectStackJpaRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("해당 관계는 존재하지 않습니다"));
 
         projectStackJpaRepository.delete(projectStackEntity);
     }
+
     @Override
-    public void deleteStackOnProjectIdAndStackId(Long projectId, Long stackId) {
-        MyProjectEntity myProjectEntity = myProjectJpaRepository.findById(projectId)
-                .orElseThrow(() -> new NoSuchElementException("해당 프로젝트는 존재하지 않습니다"));
+    public void allDelete(List<ProjectStack> projectStacks) {
+        for (ProjectStack projectStack : projectStacks) {
+            ProjectStackEntity projectStackEntity = projectStackJpaRepository.findById(projectStack.getId())
+                    .orElseThrow(() -> new NoSuchElementException("해당 관계는 존재하지 않습니다"));
 
-        MyStackEntity myStackEntity = myStackJpaRepository.findById(stackId)
-                .orElseThrow(() -> new NoSuchElementException("해당 스택은 존재하지 않습니다"));
-
-        ProjectStackEntity projectStackEntity = projectStackJpaRepository.findByIdAndStackId(myProjectEntity.getId(), myStackEntity.getId());
-
-        projectStackJpaRepository.delete(projectStackEntity);
+            projectStackJpaRepository.delete(projectStackEntity);
+        }
     }
 }

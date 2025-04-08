@@ -6,17 +6,9 @@ import java.util.List;
 
 public interface ProjectStackRepository {
     ProjectStack save(ProjectStack projectStack);
-
-    ProjectStack findByProjectStackId(Long projectStackId);
-
-    void allDelete(Long projectStackId);
-
-    void deleteStackOnProjectIdAndStackId(Long projectId, Long stackId);
-
+    ProjectStack findById(Long id);
     List<ProjectStack> findByProjectId(Long projectId);
-
     ProjectStack findByProjectIdAndStackId(Long projectId, Long stackId);
-
-    List<ProjectStack> findById(Long id);
-
+    void delete(Long id);
+    void allDelete(List<ProjectStack> projectStacks);
 }

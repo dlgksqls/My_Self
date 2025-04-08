@@ -30,14 +30,11 @@ public class FakeProjectStackRepository implements ProjectStackRepository {
         return newRelation;
     }
 
-    @Override
-    public ProjectStack findByProjectStackId(Long projectStackId) {
-        ProjectStack projectStack = data.stream()
-                .filter(pj -> pj.getId().equals(projectStackId))
+    public ProjectStack findById(Long id) {
+        return data.stream()
+                .filter(ps -> ps.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("해당 관계는 없습니다"));
-
-        return projectStack;
+                .orElseThrow(() -> new NoSuchElementException("해당 연관관계는 없습니다"));
     }
 
     @Override
@@ -68,20 +65,14 @@ public class FakeProjectStackRepository implements ProjectStackRepository {
     }
 
     @Override
-    public void allDelete(Long projectStackId) {
-        data.removeIf(pj -> pj.getId().equals(projectStackId));
+    public void delete(Long id) {
+        data.removeIf(ps -> ps.getId().equals(id));
     }
 
     @Override
-    public void deleteStackOnProjectIdAndStackId(Long projectId, Long stackId) {
-        data.removeIf(pj ->
-                pj.getProject().getId().equals(projectId) && pj.getStack().getId().equals(stackId)
-        );
-    }
-    public List<ProjectStack> findById(Long id) {
-        return data.stream()
-                .filter(pj -> pj.getId().equals(id))
-                .toList();
-
+    public void allDelete(List<ProjectStack> projectStacks) {
+        for (ProjectStack projectStack : projectStacks) {
+            data.removeIf(ps -> ps.getId().equals(projectStack.getId()));
+        }
     }
 }

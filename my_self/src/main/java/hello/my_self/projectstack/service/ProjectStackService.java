@@ -7,12 +7,9 @@ import java.util.List;
 
 public interface ProjectStackService {
     ProjectStack create(ProjectStackCreateDto createDto);
-
-    void allDelete(Long projectStackId);
-
+    ProjectStack findById(Long id);
     List<ProjectStack> findByProjectId(Long projectId);
-
+    void deleteByPsId(Long projectStackId);
+    void deleteByProjectId(Long projectId);
     void deleteByProjectIdAndStackId(Long projectId, Long stackId);
-    List<ProjectStack> findById(Long id);
-
 }

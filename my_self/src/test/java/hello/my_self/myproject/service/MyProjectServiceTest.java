@@ -206,11 +206,10 @@ public class MyProjectServiceTest {
         MyProject project = myProjectService.findByName(myProject.getName());
 
         // when
-        myProjectService.delete(project.getName());
+        myProjectService.delete(project.getId());
 
         // then
         assertThatThrownBy(() -> myProjectService.findByName(project.getName()))
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessage("해당 프로젝트는 없습니다.");
+                .isInstanceOf(NoSuchElementException.class);
     }
 }

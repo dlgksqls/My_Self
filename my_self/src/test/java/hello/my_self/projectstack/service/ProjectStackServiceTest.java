@@ -115,22 +115,79 @@ public class ProjectStackServiceTest {
     }
 
     @Test
-    public void ProjectStackService_delete_로_기존의_연관관계를_지울_수_있다() {
+    public void ProjectStackService_findByProjectId_로_project_와_관련된_연관관계를_모두_찾을_수_있다(){
         // given
         ProjectStackCreateDto createDto1 = ProjectStackCreateDto.builder()
                 .projectId(project1.getId())
                 .stackId(stack1.getId())
                 .build();
         ProjectStackCreateDto createDto2 = ProjectStackCreateDto.builder()
-                .projectId(project2.getId())
-                .stackId(stack1.getId())
+                .projectId(project1.getId())
+                .stackId(stack2.getId())
                 .build();
 
-        ProjectStack pj1 = projectStackService.create(createDto1);
-        ProjectStack pj2 = projectStackService.create(createDto2);
+        ProjectStack ps1 = projectStackService.create(createDto1);
+        ProjectStack ps2 = projectStackService.create(createDto2);
 
         // when
-        projectStackService.allDelete(project1.getId());
+        List<ProjectStack> psByProjectId = projectStackService.findByProjectId(ps1.getId());
+
+        // then
+        assertThat(psByProjectId.size()).isEqualTo(2);
+        for (ProjectStack projectStack : psByProjectId) {
+
+            assertThat(projectStack.getProject().getName()).isEqualTo("가볼까?");
+
+            if (projectStack.getStack().getName().equals("Django")) {
+                assertThat(projectStack.getStack().getName()).isEqualTo("Django");
+            }
+            else {
+                assertThat(projectStack.getStack().getName()).isEqualTo("Spring");
+            }
+        }
+    }
+
+    @Test
+    public void ProjectStackService_delete_로_ps를_지울_수_있다(){
+        // given
+        ProjectStackCreateDto createDto1 = ProjectStackCreateDto.builder()
+                .projectId(project1.getId())
+                .stackId(stack1.getId())
+                .build();
+        ProjectStackCreateDto createDto2 = ProjectStackCreateDto.builder()
+                .projectId(project1.getId())
+                .stackId(stack2.getId())
+                .build();
+
+        ProjectStack ps1 = projectStackService.create(createDto1);
+        ProjectStack ps2 = projectStackService.create(createDto2);
+
+        // when
+        projectStackService.deleteByPsId(ps1.getId());
+
+        // then
+        assertThatThrownBy(() -> {
+            projectStackService.findById(ps1.getId());
+        }).isInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    public void ProjectStackService_all_delete_로_프로젝트의_연관관계를_모두_지울_수_있다() {
+        // given
+        ProjectStackCreateDto createDto1 = ProjectStackCreateDto.builder()
+                .projectId(project1.getId())
+                .stackId(stack1.getId())
+                .build();
+        ProjectStackCreateDto createDto2 = ProjectStackCreateDto.builder()
+                .projectId(project1.getId())
+                .stackId(stack2.getId())
+                .build();
+
+        ProjectStack ps1 = projectStackService.create(createDto1);
+        ProjectStack ps2 = projectStackService.create(createDto2);
+
+        // when
+        projectStackService.deleteByProjectId(project1.getId());
 
         // then
         assertThatThrownBy(() -> {

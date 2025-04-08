@@ -35,10 +35,8 @@ public class ProjectStackServiceImpl implements ProjectStackService {
     }
 
     @Override
-    @Transactional
-    public void allDelete(Long projectStackId) {
-        ProjectStack projectStack = projectStackRepository.findByProjectStackId(projectStackId);
-        projectStackRepository.allDelete(projectStack.getId());
+    public ProjectStack findById(Long id) {
+        return projectStackRepository.findById(id);
     }
 
     @Override
@@ -47,17 +45,21 @@ public class ProjectStackServiceImpl implements ProjectStackService {
     }
 
     @Override
-    @Transactional
-    public void deleteByProjectIdAndStackId(Long projectId, Long stackId) {
-        MyProject project = myProjectRepository.findById(projectId);
-        MyStack stack = myStackRepository.findById(stackId);
-
-        ProjectStack projectStack = projectStackRepository.findByProjectIdAndStackId(project.getId(), stack.getId());
-        projectStackRepository.allDelete(projectStack.getId());
+    public void deleteByPsId(Long projectStackId) {
+        projectStackRepository.delete(projectStackId);
     }
 
     @Override
-    public List<ProjectStack> findById(Long id) {
-        return projectStackRepository.findById(id);
+    @Transactional
+    public void deleteByProjectId(Long projectId) {
+        List<ProjectStack> projectStacks = projectStackRepository.findByProjectId(projectId);
+        projectStackRepository.allDelete(projectStacks);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByProjectIdAndStackId(Long projectId, Long stackId) {
+        ProjectStack psByProjectIdStackId = projectStackRepository.findByProjectIdAndStackId(projectId, stackId);
+        projectStackRepository.delete(psByProjectIdStackId.getId());
     }
 }
